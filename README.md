@@ -7,9 +7,11 @@ Sematable wraps a table component, and provides:
  - row selection
  - pagination
 
-... along with the ability to persist the table state in application state with
+... with the ability to persist the table state in application state with
 Redux, so filters, sort info, selected rows, and pagination info survives route
 navigations.
+
+![](https://nodei.co/npm/sematable.png?downloads=true&downloadRank=true&stars=true)
 
 ## Reducer
 
