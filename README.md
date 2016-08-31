@@ -217,16 +217,16 @@ export default sematable('allApps', AppsTable, columns);
 We provide a few selectors that can be useful when working with sematable:
 
 ```
-getSelectedRows,
-getInitialData,
-getIsInitialized,
-getFilter,
-getColumns,
-getSortInfo,
-getPageInfo,
-getVisible,
-getSelectAll,
-getPrimaryKey,
+getSelectedRows
+getInitialData
+getIsInitialized
+getFilter
+getColumns
+getSortInfo
+getPageInfo
+getVisible
+getSelectAll
+getPrimaryKey
 ```
 
 These are exposed with `makeSelectors(tableName)`. You should use them like
