@@ -47,6 +47,7 @@ const columns = [
   { key: 'token', header: 'Token' },
   { key: 'plan', header: 'Plan', sortable: true },
   { key: 'role', header: 'Role', sortable: true },
+  { key: 'actions', header: 'Actions', Component: AppsTableActions },
 ];
 
 const propTypes = {
@@ -62,7 +63,6 @@ class AppsTable extends Component {
         {...this.props}
         selectable
         columns={columns}
-        ActionsComponent={AppsTableActions}
       />
     );
   }
