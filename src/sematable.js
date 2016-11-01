@@ -21,12 +21,13 @@ const propTypes = {
 
   isInitialized: PropTypes.bool.isRequired,
   visibleRows: PropTypes.array,
-  filter: PropTypes.string,
+  filter: PropTypes.array,
   sortInfo: PropTypes.object,
   pageInfo: PropTypes.object,
   selectAll: PropTypes.bool,
   selectedRows: PropTypes.array,
   primaryKey: PropTypes.string,
+  filterOptions: PropTypes.array,
 
   onPageChange: PropTypes.func.isRequired,
   onPageSizeChange: PropTypes.func.isRequired,
@@ -71,6 +72,7 @@ const sematable = (tableName, TableComponent, columns, configs = {}) => {
       selectAll: selectors.getSelectAll(state),
       selectedRows: selectors.getSelectedRows(state),
       primaryKey: selectors.getPrimaryKey(state),
+      filterOptions: selectors.getFilterOptions(state),
     };
   };
 
@@ -109,6 +111,7 @@ const sematable = (tableName, TableComponent, columns, configs = {}) => {
         selectAll,
         selectedRows,
         primaryKey,
+        filterOptions,
 
         /* actions */
         onPageChange,
@@ -164,6 +167,7 @@ const sematable = (tableName, TableComponent, columns, configs = {}) => {
           <div className="col-md-6">
             {showFilter && <Filter
               value={filter}
+              options={filterOptions}
               onChange={(f) => onFilterChange(f)}
             />}
           </div>

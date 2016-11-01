@@ -14,12 +14,14 @@ const users = [
     firstName: 'John',
     lastName: 'Doe',
     status: 'UNKNOWN',
+    confirmed: true,
   },
   {
     id: 2,
     firstName: 'Bob',
     lastName: 'McBobber',
     status: 'ACTIVE',
+    confirmed: false,
   },
 ];
 

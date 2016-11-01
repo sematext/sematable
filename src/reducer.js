@@ -15,7 +15,7 @@ import {
 const defaultState = (configs = {}) => ({
   page: 0,
   pageSize: configs.defaultPageSize || 5,
-  filter: '',
+  filter: [],
   sortKey: null,
   direction: null,
   selectAll: false,
@@ -72,7 +72,7 @@ const behaviours = {
   [TABLE_FILTER_CHANGED]: (state, { payload }) => ({
     ...state,
     page: 0,
-    filter: payload.filter.toLowerCase(),
+    filter: payload.filter,
   }),
   [TABLE_SELECT_ALL_CHANGED]: (state) => ({
     ...state,

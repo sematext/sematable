@@ -9,17 +9,30 @@ function paginate(rows, { page, pageSize }) {
   return rows.slice(start, start + pageSize);
 }
 
-function filter(rows = [], textFilter, columns) {
-  if (!textFilter) {
+function filter(rows = [], filters = [], columns) {
+  if (filters.length === 0) {
     return rows.slice(0);
   }
-  return _.filter(rows, (row) => _.some(columns, (column) => {
+
+  // apply text filter across all columns
+  let filteredRows = _.filter(rows, row => _.some(columns, (column) => {
     if (!column.filterable) {
       return false;
     }
     const normalized = String(_.get(row, column.key)).toLowerCase();
-    return normalized.indexOf(textFilter) > -1;
+    return _.every(filters, f => !f.textFilter || normalized.indexOf(f.value) > -1);
   }));
+
+  // apply value filters on taggable columns
+  filteredRows = _.filter(filteredRows, row => _.every(columns, column => {
+    if (!column.taggable) {
+      return true;
+    }
+    const value = _.get(row, column.key);
+    return _.every(filters, f => !f.valueFilter || f.key !== column.key || f.value === value);
+  }));
+
+  return filteredRows;
 }
 
 function sort(rows, { sortKey, direction }) {
@@ -69,6 +82,49 @@ export default (tableName) => {
     getFilter,
     getColumns,
     (initialData, textFilter, columns) => filter(initialData, textFilter, columns)
+  );
+
+  const getFilterOptions = createSelector(
+    getInitialData,
+    getColumns,
+    (initialData, columns) => {
+      const options = [];
+      const values = {};
+      const columnMap = _.keyBy(columns, 'key');
+
+      initialData.forEach(row => {
+        columns.forEach(column => {
+          if (!column.taggable) {
+            return;
+          }
+          if (!values[column.key]) {
+            values[column.key] = [];
+          }
+          const columnValues = values[column.key];
+          const value = _.get(row, column.key);
+          if (!columnValues.includes(value)) {
+            columnValues.push(value);
+          }
+        });
+      });
+
+      _.forOwn(values, (columnValues, key) => {
+        columnValues.forEach(value => {
+          let labelValue = value;
+          if (_.isBoolean(value)) {
+            labelValue = value ? 'Yes' : 'No';
+          }
+          options.push({
+            label: `${columnMap[key].header}:${labelValue}`,
+            valueFilter: true,
+            value,
+            key,
+          });
+        });
+      });
+
+      return options;
+    }
   );
 
   const getPageInfo = createSelector(
@@ -151,5 +207,6 @@ export default (tableName) => {
     getSelectedRows,
     getSelectAll,
     getPrimaryKey,
+    getFilterOptions,
   };
 };
