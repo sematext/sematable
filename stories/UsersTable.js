@@ -12,6 +12,11 @@ const columns = [
     key: 'status',
     header: 'Status',
     taggable: true,
+    values: [
+      'UNKNOWN',
+      'ACTIVE',
+      'DISABLED',
+    ],
     getValueTitle: (value) => ({
       UNKNOWN: 'Gone missing users',
       ACTIVE: 'Active users',

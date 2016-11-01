@@ -89,12 +89,20 @@ export default (tableName) => {
     getColumns,
     (initialData, columns) => {
       const options = [];
-      const values = {};
       const columnMap = _.keyBy(columns, 'key');
+      const values = {};
 
+      // set predefined values
+      columns.forEach(column => {
+        if (column.taggable && column.values) {
+          values[column.key] = column.values;
+        }
+      });
+
+      // collect values for columns that don't have predefined values
       initialData.forEach(row => {
         columns.forEach(column => {
-          if (!column.taggable) {
+          if (!column.taggable || column.values) {
             return;
           }
           if (!values[column.key]) {
