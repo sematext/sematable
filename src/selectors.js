@@ -110,15 +110,28 @@ export default (tableName) => {
 
       _.forOwn(values, (columnValues, key) => {
         columnValues.forEach(value => {
-          let labelValue = value;
-          if (_.isBoolean(value)) {
-            labelValue = value ? 'Yes' : 'No';
-          }
+          const column = columnMap[key];
+          const {
+            getValueTitle = () => undefined,
+            getValueClassName = () => undefined,
+            getValueLabel = () => {
+              let labelValue = value;
+              if (_.isBoolean(value)) {
+                labelValue = value ? 'Yes' : 'No';
+              }
+              return `${column.header}:${labelValue}`;
+            },
+          } = column;
+          const title = getValueTitle(value);
+          const label = getValueLabel(value);
+          const className = getValueClassName(value);
           options.push({
-            label: `${columnMap[key].header}:${labelValue}`,
-            valueFilter: true,
-            value,
             key,
+            label,
+            value,
+            title,
+            className,
+            valueFilter: true,
           });
         });
       });

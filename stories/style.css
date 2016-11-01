@@ -1,0 +1,8 @@
+.col-unknown,
+.col-unknown > span {
+  color: red;
+}
+.col-active,
+.col-active > span {
+  color: blue;
+}
