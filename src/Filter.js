@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { Creatable } from 'react-select';
+import { createTextFilter } from './common';
 
 const propTypes = {
   value: PropTypes.array,
@@ -21,14 +22,7 @@ class Filter extends Component {
         placeholder="Search by text or tags"
         promptTextCreator={(txt) => `Search for '${txt}'`}
         onChange={(selected) => onChange(selected)}
-        newOptionCreator={({ label, labelKey, valueKey }) => {
-          const option = {};
-          option[valueKey] = label.toLowerCase();
-          option[labelKey] = label.toLowerCase();
-          option.textFilter = true;
-          option.className = 'Select-create-option-placeholder';
-          return option;
-        }}
+        newOptionCreator={({ label }) => createTextFilter(label)}
         value={value}
         multi
         style={{

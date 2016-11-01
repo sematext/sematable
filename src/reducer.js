@@ -10,7 +10,9 @@ import {
   TABLE_SELECT_ALL_CHANGED,
   TABLE_ROW_CHECKED_CHANGED,
   TABLE_DESTROY_STATE,
+  TABLE_SET_FILTER,
 } from './actions.js';
+import { createTextFilter, createValueFilter } from './common';
 
 const defaultState = (configs = {}) => ({
   page: 0,
@@ -46,6 +48,20 @@ const behaviours = {
     ...state,
     initialData: payload.data,
   }),
+  [TABLE_SET_FILTER]: (state, { payload }) => {
+    const columnMap = _.keyBy(state.columns, 'key');
+    const filter = payload.filterValue.map(f => {
+      if (_.isString(f)) {
+        return createTextFilter(f);
+      }
+      const column = columnMap[f.key];
+      return createValueFilter(column, f.value);
+    });
+    return {
+      ...state,
+      filter,
+    };
+  },
   [TABLE_PAGE_CHANGED]: (state, { payload }) => ({
     ...state,
     page: payload.page,

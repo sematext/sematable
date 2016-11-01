@@ -37,7 +37,13 @@ storiesOf('Sematable', module)
         >
           Reset state
         </button>
-        <UsersTable data={users} />
+        <UsersTable
+          data={users}
+          filterValue={[
+            'o',
+            { key: 'confirmed', value: true },
+          ]}
+        />
       </div>
     </Provider>
   ));

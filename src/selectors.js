@@ -1,5 +1,6 @@
-import { createSelector } from 'reselect';
 import _ from 'lodash';
+import { createSelector } from 'reselect';
+import { createValueFilter } from './common';
 
 function paginate(rows, { page, pageSize }) {
   if (pageSize < 1) {
@@ -119,28 +120,7 @@ export default (tableName) => {
       _.forOwn(values, (columnValues, key) => {
         columnValues.forEach(value => {
           const column = columnMap[key];
-          const {
-            getValueTitle = () => undefined,
-            getValueClassName = () => undefined,
-            getValueLabel = () => {
-              let labelValue = value;
-              if (_.isBoolean(value)) {
-                labelValue = value ? 'Yes' : 'No';
-              }
-              return `${column.header}:${labelValue}`;
-            },
-          } = column;
-          const title = getValueTitle(value);
-          const label = getValueLabel(value);
-          const className = getValueClassName(value);
-          options.push({
-            key,
-            label,
-            value,
-            title,
-            className,
-            valueFilter: true,
-          });
+          options.push(createValueFilter(column, value));
         });
       });
 
