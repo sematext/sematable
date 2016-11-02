@@ -113,7 +113,7 @@ const sematable = (tableName, TableComponent, columns, configs = {}) => {
       }
 
       if (filterValue !== nextProps.filterValue) {
-        onNewFilterValue(filterValue);
+        onNewFilterValue(nextProps.filterValue);
       }
     }
 
