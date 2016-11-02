@@ -6,7 +6,7 @@ import TableRow from './TableRow.js';
 import Table from './Table.js';
 import makeSelectors from './selectors.js';
 import reducer from './reducer.js';
-import { tableDestroyState } from './actions.js';
+import { tableDestroyState, tableSetFilter } from './actions.js';
 
 export {
   SortableHeader,
@@ -16,6 +16,7 @@ export {
   TableRow,
   makeSelectors,
   tableDestroyState,
+  tableSetFilter,
   reducer,
 };
 export default sematable;
