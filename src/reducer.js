@@ -7,6 +7,7 @@ import {
   TABLE_PAGE_SIZE_CHANGED,
   TABLE_SORT_CHANGED,
   TABLE_FILTER_CHANGED,
+  TABLE_FILTER_TEXT_CHANGED,
   TABLE_SELECT_ALL_CHANGED,
   TABLE_ROW_CHECKED_CHANGED,
   TABLE_DESTROY_STATE,
@@ -89,6 +90,11 @@ const behaviours = {
     ...state,
     page: 0,
     filter: payload.filter,
+  }),
+  [TABLE_FILTER_TEXT_CHANGED]: (state, { payload }) => ({
+    ...state,
+    page: 0,
+    filterText: payload.filterText,
   }),
   [TABLE_SELECT_ALL_CHANGED]: (state) => ({
     ...state,

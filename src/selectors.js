@@ -10,28 +10,46 @@ function paginate(rows, { page, pageSize }) {
   return rows.slice(start, start + pageSize);
 }
 
-function filter(rows = [], filters = [], columns) {
-  if (filters.length === 0) {
-    return rows.slice(0);
+/**
+ * rows - original data
+ * filters - list of selected filters
+ * filterText - currently entered text in filter input
+ * columns - column definitions
+ */
+function filter(rows = [], filters = [], filterText, columns) {
+  let filteredRows = rows.slice(0);
+  if (filters.length === 0 && !filterText) {
+    return filteredRows;
   }
 
-  // apply text filter across all columns
-  let filteredRows = _.filter(rows, row => _.some(columns, (column) => {
-    if (!column.filterable) {
-      return false;
-    }
-    const normalized = String(_.get(row, column.key)).toLowerCase();
-    return _.every(filters, f => !f.textFilter || normalized.indexOf(f.value) > -1);
-  }));
+  const textFilters = [
+    ...(filterText ? [filterText] : []),
+    ...filters.filter(f => f.textFilter).map(f => f.value),
+  ];
 
-  // apply value filters on taggable columns
-  filteredRows = _.filter(filteredRows, row => _.every(columns, column => {
-    if (!column.taggable) {
-      return true;
-    }
-    const value = _.get(row, column.key);
-    return _.every(filters, f => !f.valueFilter || f.key !== column.key || f.value === value);
-  }));
+  const valueFilters = filters.filter(f => f.valueFilter);
+
+  if (textFilters.length > 0) {
+    // apply text filters across all columns
+    filteredRows = _.filter(rows, row => _.some(columns, (column) => {
+      if (!column.filterable) {
+        return false;
+      }
+      const normalized = String(_.get(row, column.key)).toLowerCase();
+      return _.every(textFilters, f => normalized.indexOf(f) > -1);
+    }));
+  }
+
+  if (valueFilters.length > 0) {
+    // apply value filters on taggable columns
+    filteredRows = _.filter(filteredRows, row => _.every(columns, column => {
+      if (!column.taggable) {
+        return true;
+      }
+      const value = _.get(row, column.key);
+      return _.every(valueFilters, f => f.key !== column.key || f.value === value);
+    }));
+  }
 
   return filteredRows;
 }
@@ -66,6 +84,7 @@ export default (tableName) => {
   const getIsInitialized = (state) => state.sematable[tableName] !== undefined;
   const getInitialData = (state) => tableProp(state, 'initialData');
   const getFilter = (state) => tableProp(state, 'filter');
+  const getFilterText = (state) => tableProp(state, 'filterText');
   const getColumns = (state) => tableProp(state, 'columns');
   const getPage = (state) => tableProp(state, 'page');
   const getPrimaryKey = (state) => tableProp(state, 'primaryKey');
@@ -81,8 +100,11 @@ export default (tableName) => {
   const getFiltered = createSelector(
     getInitialData,
     getFilter,
+    getFilterText,
     getColumns,
-    (initialData, textFilter, columns) => filter(initialData, textFilter, columns)
+    (initialData, filters, filterText, columns) => filter(
+      initialData, filters, filterText, columns
+    )
   );
 
   const getFilterOptions = createSelector(

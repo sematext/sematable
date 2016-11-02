@@ -11,6 +11,7 @@ import {
   tablePageChanged,
   tablePageSizeChanged,
   tableFilterChanged,
+  tableFilterTextChanged,
   tableSortChanged,
   tableRowCheckedChanged,
   tableSelectAllChanged,
@@ -34,6 +35,7 @@ const propTypes = {
   onPageChange: PropTypes.func.isRequired,
   onPageSizeChange: PropTypes.func.isRequired,
   onFilterChange: PropTypes.func.isRequired,
+  onFilterTextChange: PropTypes.func.isRequired,
   onHeaderClick: PropTypes.func.isRequired,
   onInitialize: PropTypes.func.isRequired,
   onNewData: PropTypes.func.isRequired,
@@ -83,6 +85,7 @@ const sematable = (tableName, TableComponent, columns, configs = {}) => {
     onPageChange: (page) => dispatch(tablePageChanged(tableName, page)),
     onPageSizeChange: (pageSize) => dispatch(tablePageSizeChanged(tableName, pageSize)),
     onFilterChange: (filter) => dispatch(tableFilterChanged(tableName, filter)),
+    onFilterTextChange: (filterText) => dispatch(tableFilterTextChanged(tableName, filterText)),
     onHeaderClick: (sortKey) => dispatch(tableSortChanged(tableName, sortKey)),
     onNewData: (data) => dispatch(tableNewData(tableName, data)),
     onNewFilterValue: (data) => dispatch(tableSetFilter(tableName, data)),
@@ -131,6 +134,7 @@ const sematable = (tableName, TableComponent, columns, configs = {}) => {
         onPageChange,
         onPageSizeChange,
         onFilterChange,
+        onFilterTextChange,
         onHeaderClick,
         onRowCheckedChange,
         onSelectAllChange,
@@ -183,6 +187,7 @@ const sematable = (tableName, TableComponent, columns, configs = {}) => {
               value={filter}
               options={filterOptions}
               onChange={(f) => onFilterChange(f)}
+              onTextChange={(f) => onFilterTextChange(f)}
             />}
           </div>
           <div className="col-md-12">

@@ -3,6 +3,7 @@ export const TABLE_NEW_DATA = 'sematable/TABLE_NEW_DATA';
 export const TABLE_PAGE_CHANGED = 'sematable/TABLE_PAGE_CHANGED';
 export const TABLE_PAGE_SIZE_CHANGED = 'sematable/TABLE_PAGE_SIZE_CHANGED';
 export const TABLE_FILTER_CHANGED = 'sematable/TABLE_FILTER_CHANGED';
+export const TABLE_FILTER_TEXT_CHANGED = 'sematable/TABLE_FILTER_TEXT_CHANGED';
 export const TABLE_SORT_CHANGED = 'sematable/TABLE_SORT_CHANGED';
 export const TABLE_ROW_CHECKED_CHANGED = 'sematable/TABLE_ROW_CHECKED_CHANGED';
 export const TABLE_SELECT_ALL_CHANGED = 'sematable/TABLE_SELECT_ALL_CHANGED';
@@ -48,6 +49,14 @@ export const tableFilterChanged = (tableName, filter) => ({
   payload: {
     tableName,
     filter,
+  },
+});
+
+export const tableFilterTextChanged = (tableName, filterText) => ({
+  type: TABLE_FILTER_TEXT_CHANGED,
+  payload: {
+    tableName,
+    filterText,
   },
 });
 
