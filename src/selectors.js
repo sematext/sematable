@@ -1,5 +1,6 @@
-import { createSelector } from 'reselect';
 import _ from 'lodash';
+import { createSelector } from 'reselect';
+import { createValueFilter } from './common';
 
 function paginate(rows, { page, pageSize }) {
   if (pageSize < 1) {
@@ -9,17 +10,48 @@ function paginate(rows, { page, pageSize }) {
   return rows.slice(start, start + pageSize);
 }
 
-function filter(rows = [], textFilter, columns) {
-  if (!textFilter) {
-    return rows.slice(0);
+/**
+ * rows - original data
+ * filters - list of selected filters
+ * filterText - currently entered text in filter input
+ * columns - column definitions
+ */
+function filter(rows = [], filters = [], filterText, columns) {
+  let filteredRows = rows.slice(0);
+  if (filters.length === 0 && !filterText) {
+    return filteredRows;
   }
-  return _.filter(rows, (row) => _.some(columns, (column) => {
-    if (!column.filterable) {
-      return false;
-    }
-    const normalized = String(_.get(row, column.key)).toLowerCase();
-    return normalized.indexOf(textFilter) > -1;
-  }));
+
+  const textFilters = [
+    ...(filterText ? [filterText] : []),
+    ...filters.filter(f => f.textFilter).map(f => f.value),
+  ];
+
+  const valueFilters = filters.filter(f => f.valueFilter);
+
+  if (textFilters.length > 0) {
+    // apply text filters across all columns
+    filteredRows = _.filter(rows, row => _.some(columns, (column) => {
+      if (!column.searchable) {
+        return false;
+      }
+      const normalized = String(_.get(row, column.key)).toLowerCase();
+      return _.every(textFilters, f => normalized.indexOf(f) > -1);
+    }));
+  }
+
+  if (valueFilters.length > 0) {
+    // apply value filters on filterable columns
+    filteredRows = _.filter(filteredRows, row => _.every(columns, column => {
+      if (!column.filterable) {
+        return true;
+      }
+      const value = _.get(row, column.key);
+      return _.every(valueFilters, f => f.key !== column.key || f.value === value);
+    }));
+  }
+
+  return filteredRows;
 }
 
 function sort(rows, { sortKey, direction }) {
@@ -52,6 +84,7 @@ export default (tableName) => {
   const getIsInitialized = (state) => state.sematable[tableName] !== undefined;
   const getInitialData = (state) => tableProp(state, 'initialData');
   const getFilter = (state) => tableProp(state, 'filter');
+  const getFilterText = (state) => tableProp(state, 'filterText');
   const getColumns = (state) => tableProp(state, 'columns');
   const getPage = (state) => tableProp(state, 'page');
   const getPrimaryKey = (state) => tableProp(state, 'primaryKey');
@@ -67,8 +100,54 @@ export default (tableName) => {
   const getFiltered = createSelector(
     getInitialData,
     getFilter,
+    getFilterText,
     getColumns,
-    (initialData, textFilter, columns) => filter(initialData, textFilter, columns)
+    (initialData, filters, filterText, columns) => filter(
+      initialData, filters, filterText, columns
+    )
+  );
+
+  const getFilterOptions = createSelector(
+    getInitialData,
+    getColumns,
+    (initialData, columns) => {
+      const options = [];
+      const columnMap = _.keyBy(columns, 'key');
+      const values = {};
+
+      // set predefined values
+      columns.forEach(column => {
+        if (column.filterable && column.filterValues) {
+          values[column.key] = column.filterValues;
+        }
+      });
+
+      // collect values for columns that don't have predefined values
+      initialData.forEach(row => {
+        columns.forEach(column => {
+          if (!column.filterable || column.filterValues) {
+            return;
+          }
+          if (!values[column.key]) {
+            values[column.key] = [];
+          }
+          const columnValues = values[column.key];
+          const value = _.get(row, column.key);
+          if (!columnValues.includes(value)) {
+            columnValues.push(value);
+          }
+        });
+      });
+
+      _.forOwn(values, (columnValues, key) => {
+        columnValues.forEach(value => {
+          const column = columnMap[key];
+          options.push(createValueFilter(column, value));
+        });
+      });
+
+      return options;
+    }
   );
 
   const getPageInfo = createSelector(
@@ -151,5 +230,6 @@ export default (tableName) => {
     getSelectedRows,
     getSelectAll,
     getPrimaryKey,
+    getFilterOptions,
   };
 };

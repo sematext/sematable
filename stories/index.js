@@ -14,12 +14,14 @@ const users = [
     firstName: 'John',
     lastName: 'Doe',
     status: 'UNKNOWN',
+    confirmed: true,
   },
   {
     id: 2,
     firstName: 'Bob',
     lastName: 'McBobber',
     status: 'ACTIVE',
+    confirmed: false,
   },
 ];
 
@@ -35,7 +37,13 @@ storiesOf('Sematable', module)
         >
           Reset state
         </button>
-        <UsersTable data={users} />
+        <UsersTable
+          data={users}
+          filterValue={[
+            'o',
+            { key: 'confirmed', value: true },
+          ]}
+        />
       </div>
     </Provider>
   ));

@@ -2,7 +2,8 @@
 
 Sematable wraps a table component, and provides:
 
- - filtering
+ - filtering by column value
+ - search with text
  - sorting
  - row selection
  - pagination
@@ -42,8 +43,8 @@ import sematable, { Table } from 'sematable';
 import AppsTableActions from './AppsTableActions';
 
 const columns = [
-  { key: 'id', header: 'ID', sortable: true, filterable: true, primaryKey: true },
-  { key: 'name', header: 'Application', sortable: true, filterable: true },
+  { key: 'id', header: 'ID', sortable: true, searchable: true, primaryKey: true },
+  { key: 'name', header: 'Application', sortable: true, searchable: true },
   { key: 'token', header: 'Token' },
   { key: 'plan', header: 'Plan', sortable: true },
   { key: 'role', header: 'Role', sortable: true },
@@ -108,12 +109,20 @@ Columns definitions have the following properties:
  - _key_ is the name of the property used in row objects
  - _header_ is the header label that will be used for this column
  - _sortable_ defines if user should be able to sort by this column
- - _filterable_ defines if user should be able to filter by this column (simple case-insensitive substring search)
+ - _searchable_ defines if user should be able to text-search by this column (simple case-insensitive substring search)
  - _primaryKey_ defines if this column is the primary key
  - _hidden_ defines if we should hide this column (useful if you don't want to show primary key column)
  - _Component_ defines which component should be used to render cell contents
+ - _filterable_ defines if user should be able to filter rows by distinct values of this column
+ - _filterValues_ can be provided to define distinct filter values for this
+   column. If not provided, unique values will be extracted from provided data.
+ - _getFilterTitle_ is a function with `(value)` signature that can be provided to customize the filter title
+ - _getFilterLabel_ is a function with `(value)` signature that can be provided to customize the filter label
+ - _getFilterClassName_ is a function with `(value)` signature that can be provided to customize the filter css class
 
 At least one column definition should have `primaryKey: true`.
+
+Check out `stories/UsersTable.js` to see how these properties can be used.
 
 ## Advanced Usage
 
@@ -157,8 +166,8 @@ import sematable, {
 } from 'sematable';
 
 const columns = {
-  id: { header: 'ID', filterable: true, sortable: true, primaryKey: true },
-  name: { header: 'Name', filterable: true, sortable: true },
+  id: { header: 'ID', searchable: true, sortable: true, primaryKey: true },
+  name: { header: 'Name', searchable: true, sortable: true },
 };
 
 const propTypes = {
@@ -248,9 +257,42 @@ You can use the below actions to alter the state of the table:
  - `tableDestroyState(tableName)` resets/destroys the current state of the
    table. This can be used in `componentWillUnmount()` to reset the related
    redux state.
+ - `tableSetFilter(tableName, filterValue)` sets the table filters where
+   `filterValue` is an array of filter objects.
 
 You can import actions from the sematable module like this:
 
 ```javascript
 import { tableDestroyState } from 'sematable';
+```
+
+## Filters
+
+You can set the list of filters by passing `filterValue` to your sematable
+component, or by using the `tableSetFilter` action. In either case, the
+provided value should be an array of two types of objects:
+
+ - text filter defined simply as a string
+ - value filter defined as object with properties `key` and `value`, where
+   `key` is the column key you want to filter, and `value` is the value you
+   want to filter by.
+
+For example:
+
+```javascript
+<UsersTable
+  data={users}
+  filterValue={[
+    'Bob',
+    { key: 'confirmed', value: true },
+  ]}
+/>
+```
+Or with `tableSetFilter`:
+
+```javascript
+dispatch(tableSetFilter('usersTable', [
+  'Bob',
+  { key: 'confirmed', value: true },
+]));
 ```

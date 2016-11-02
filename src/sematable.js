@@ -11,9 +11,11 @@ import {
   tablePageChanged,
   tablePageSizeChanged,
   tableFilterChanged,
+  tableFilterTextChanged,
   tableSortChanged,
   tableRowCheckedChanged,
   tableSelectAllChanged,
+  tableSetFilter,
 } from './actions.js';
 
 const propTypes = {
@@ -21,19 +23,23 @@ const propTypes = {
 
   isInitialized: PropTypes.bool.isRequired,
   visibleRows: PropTypes.array,
-  filter: PropTypes.string,
+  filter: PropTypes.array,
   sortInfo: PropTypes.object,
   pageInfo: PropTypes.object,
   selectAll: PropTypes.bool,
   selectedRows: PropTypes.array,
   primaryKey: PropTypes.string,
+  filterOptions: PropTypes.array,
+  filterValue: PropTypes.array,
 
   onPageChange: PropTypes.func.isRequired,
   onPageSizeChange: PropTypes.func.isRequired,
   onFilterChange: PropTypes.func.isRequired,
+  onFilterTextChange: PropTypes.func.isRequired,
   onHeaderClick: PropTypes.func.isRequired,
   onInitialize: PropTypes.func.isRequired,
   onNewData: PropTypes.func.isRequired,
+  onNewFilterValue: PropTypes.func.isRequired,
   onRowCheckedChange: PropTypes.func.isRequired,
   onSelectAllChange: PropTypes.func.isRequired,
 };
@@ -47,8 +53,8 @@ const propTypes = {
  * and column definitions.  Column definitions should look like this:
  *
  *  {
- *    id: { header: 'ID', filterable: true },
- *    name: { header: 'Name', filterable: true },
+ *    id: { header: 'ID', searchable: true },
+ *    name: { header: 'Name', searchable: true },
  *  };
  *
  */
@@ -71,6 +77,7 @@ const sematable = (tableName, TableComponent, columns, configs = {}) => {
       selectAll: selectors.getSelectAll(state),
       selectedRows: selectors.getSelectedRows(state),
       primaryKey: selectors.getPrimaryKey(state),
+      filterOptions: selectors.getFilterOptions(state),
     };
   };
 
@@ -78,8 +85,10 @@ const sematable = (tableName, TableComponent, columns, configs = {}) => {
     onPageChange: (page) => dispatch(tablePageChanged(tableName, page)),
     onPageSizeChange: (pageSize) => dispatch(tablePageSizeChanged(tableName, pageSize)),
     onFilterChange: (filter) => dispatch(tableFilterChanged(tableName, filter)),
+    onFilterTextChange: (filterText) => dispatch(tableFilterTextChanged(tableName, filterText)),
     onHeaderClick: (sortKey) => dispatch(tableSortChanged(tableName, sortKey)),
     onNewData: (data) => dispatch(tableNewData(tableName, data)),
+    onNewFilterValue: (data) => dispatch(tableSetFilter(tableName, data)),
     onSelectAllChange: () => dispatch(tableSelectAllChanged(tableName)),
     onRowCheckedChange: (row) => dispatch(tableRowCheckedChanged(tableName, row)),
     onInitialize: (data) => dispatch(tableInitialize(tableName, data, columns, configs)),
@@ -92,9 +101,19 @@ const sematable = (tableName, TableComponent, columns, configs = {}) => {
     }
 
     componentWillReceiveProps(nextProps) {
-      const { data, onNewData } = this.props;
+      const {
+        data,
+        filterValue,
+        onNewData,
+        onNewFilterValue,
+      } = this.props;
+
       if (data !== nextProps.data) {
         onNewData(nextProps.data);
+      }
+
+      if (filterValue !== nextProps.filterValue) {
+        onNewFilterValue(filterValue);
       }
     }
 
@@ -109,11 +128,13 @@ const sematable = (tableName, TableComponent, columns, configs = {}) => {
         selectAll,
         selectedRows,
         primaryKey,
+        filterOptions,
 
         /* actions */
         onPageChange,
         onPageSizeChange,
         onFilterChange,
+        onFilterTextChange,
         onHeaderClick,
         onRowCheckedChange,
         onSelectAllChange,
@@ -164,7 +185,9 @@ const sematable = (tableName, TableComponent, columns, configs = {}) => {
           <div className="col-md-6">
             {showFilter && <Filter
               value={filter}
+              options={filterOptions}
               onChange={(f) => onFilterChange(f)}
+              onTextChange={(f) => onFilterTextChange(f)}
             />}
           </div>
           <div className="col-md-12">

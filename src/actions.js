@@ -3,10 +3,12 @@ export const TABLE_NEW_DATA = 'sematable/TABLE_NEW_DATA';
 export const TABLE_PAGE_CHANGED = 'sematable/TABLE_PAGE_CHANGED';
 export const TABLE_PAGE_SIZE_CHANGED = 'sematable/TABLE_PAGE_SIZE_CHANGED';
 export const TABLE_FILTER_CHANGED = 'sematable/TABLE_FILTER_CHANGED';
+export const TABLE_FILTER_TEXT_CHANGED = 'sematable/TABLE_FILTER_TEXT_CHANGED';
 export const TABLE_SORT_CHANGED = 'sematable/TABLE_SORT_CHANGED';
 export const TABLE_ROW_CHECKED_CHANGED = 'sematable/TABLE_ROW_CHECKED_CHANGED';
 export const TABLE_SELECT_ALL_CHANGED = 'sematable/TABLE_SELECT_ALL_CHANGED';
 export const TABLE_DESTROY_STATE = 'sematable/TABLE_DESTROY_STATE';
+export const TABLE_SET_FILTER = 'sematable/TABLE_SET_FILTER';
 
 export const tableInitialize = (tableName, initialData, columns, configs) => ({
   type: TABLE_INITIALIZE,
@@ -50,6 +52,14 @@ export const tableFilterChanged = (tableName, filter) => ({
   },
 });
 
+export const tableFilterTextChanged = (tableName, filterText) => ({
+  type: TABLE_FILTER_TEXT_CHANGED,
+  payload: {
+    tableName,
+    filterText,
+  },
+});
+
 export const tableSortChanged = (tableName, sortKey) => ({
   type: TABLE_SORT_CHANGED,
   payload: {
@@ -77,5 +87,13 @@ export const tableDestroyState = (tableName) => ({
   type: TABLE_DESTROY_STATE,
   payload: {
     tableName,
+  },
+});
+
+export const tableSetFilter = (tableName, filterValue) => ({
+  type: TABLE_SET_FILTER,
+  payload: {
+    tableName,
+    filterValue,
   },
 });
