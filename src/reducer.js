@@ -90,6 +90,7 @@ const behaviours = {
     ...state,
     page: 0,
     filter: payload.filter,
+    filterText: null,
   }),
   [TABLE_FILTER_TEXT_CHANGED]: (state, { payload }) => ({
     ...state,
