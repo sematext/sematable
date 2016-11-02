@@ -11,24 +11,24 @@ const columns = [
   {
     key: 'status',
     header: 'Status',
-    taggable: true,
-    values: [
+    filterable: true,
+    filterValues: [
       'UNKNOWN',
       'ACTIVE',
       'DISABLED',
     ],
-    getValueTitle: (value) => ({
+    getFilterTitle: (value) => ({
       UNKNOWN: 'Gone missing users',
       ACTIVE: 'Active users',
     }[value]),
-    getValueClassName: (value) => `col-${value.toLowerCase()}`,
+    getFilterClassName: (value) => `col-${value.toLowerCase()}`,
   },
   {
     key: 'confirmed',
     header: 'Confirmed',
     Component: YesNo,
-    taggable: true,
-    getValueTitle: (value) => value ? 'Confirmed' : 'Not confirmed',
+    filterable: true,
+    getFilterTitle: (value) => value ? 'Confirmed' : 'Not confirmed',
   },
 ];
 

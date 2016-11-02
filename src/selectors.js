@@ -41,9 +41,9 @@ function filter(rows = [], filters = [], filterText, columns) {
   }
 
   if (valueFilters.length > 0) {
-    // apply value filters on taggable columns
+    // apply value filters on filterable columns
     filteredRows = _.filter(filteredRows, row => _.every(columns, column => {
-      if (!column.taggable) {
+      if (!column.filterable) {
         return true;
       }
       const value = _.get(row, column.key);
@@ -117,15 +117,15 @@ export default (tableName) => {
 
       // set predefined values
       columns.forEach(column => {
-        if (column.taggable && column.values) {
-          values[column.key] = column.values;
+        if (column.filterable && column.filterValues) {
+          values[column.key] = column.filterValues;
         }
       });
 
       // collect values for columns that don't have predefined values
       initialData.forEach(row => {
         columns.forEach(column => {
-          if (!column.taggable || column.values) {
+          if (!column.filterable || column.filterValues) {
             return;
           }
           if (!values[column.key]) {

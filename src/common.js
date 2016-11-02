@@ -10,9 +10,9 @@ export const createTextFilter = (text) => ({
 export const createValueFilter = (column, value) => {
   const {
     key,
-    getValueTitle = () => undefined,
-    getValueClassName = () => undefined,
-    getValueLabel = () => {
+    getFilterTitle = () => undefined,
+    getFilterClassName = () => undefined,
+    getFilterLabel = () => {
       let labelValue = value;
       if (_.isBoolean(value)) {
         labelValue = value ? 'Yes' : 'No';
@@ -20,9 +20,9 @@ export const createValueFilter = (column, value) => {
       return `${column.header}:${labelValue}`;
     },
   } = column;
-  const title = getValueTitle(value);
-  const label = getValueLabel(value);
-  const className = getValueClassName(value);
+  const title = getFilterTitle(value);
+  const label = getFilterLabel(value);
+  const className = getFilterClassName(value);
   return {
     key,
     label,
