@@ -29,8 +29,8 @@ function filter(rows = [], filters = [], filterText, columns) {
 
   const valueFilters = filters.filter(f => f.valueFilter);
 
+  // apply text filters across all columns
   if (textFilters.length > 0) {
-    // apply text filters across all columns
     filteredRows = _.filter(rows, row => _.some(columns, (column) => {
       if (!column.searchable) {
         return false;
@@ -40,15 +40,16 @@ function filter(rows = [], filters = [], filterText, columns) {
     }));
   }
 
+  // apply value filters on filterable columns
   if (valueFilters.length > 0) {
-    // apply value filters on filterable columns
-    filteredRows = _.filter(filteredRows, row => _.every(columns, column => {
-      if (!column.filterable) {
-        return true;
+    const groups = _.groupBy(valueFilters, 'key');
+    filteredRows = _.filter(filteredRows, row => _.every(
+      groups,
+      (groupFilters, groupKey) => {
+        const value = _.get(row, groupKey);
+        return _.some(groupFilters, f => f.value === value);
       }
-      const value = _.get(row, column.key);
-      return _.every(valueFilters, f => f.key !== column.key || f.value === value);
-    }));
+    ));
   }
 
   return filteredRows;
