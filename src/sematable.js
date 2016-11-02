@@ -53,8 +53,8 @@ const propTypes = {
  * and column definitions.  Column definitions should look like this:
  *
  *  {
- *    id: { header: 'ID', filterable: true },
- *    name: { header: 'Name', filterable: true },
+ *    id: { header: 'ID', searchable: true },
+ *    name: { header: 'Name', searchable: true },
  *  };
  *
  */

@@ -32,7 +32,7 @@ function filter(rows = [], filters = [], filterText, columns) {
   if (textFilters.length > 0) {
     // apply text filters across all columns
     filteredRows = _.filter(rows, row => _.some(columns, (column) => {
-      if (!column.filterable) {
+      if (!column.searchable) {
         return false;
       }
       const normalized = String(_.get(row, column.key)).toLowerCase();

@@ -28,7 +28,7 @@ class Filter extends Component {
     return (
       <Creatable
         options={options}
-        noResultsText="No tags found, type text and press Enter to search"
+        noResultsText="Type text to search, press Enter to save as filter"
         placeholder="Search by text or tags"
         promptTextCreator={(txt) => `Search for '${txt}'`}
         onChange={(selected) => onChange(selected)}
