@@ -10,6 +10,14 @@ const propTypes = {
 };
 
 class Filter extends Component {
+  shouldComponentUpdate(nextProps) {
+    const { value, options } = this.props;
+    if (nextProps.value !== value || nextProps.options !== options) {
+      return true;
+    }
+    return false;
+  }
+
   render() {
     const {
       value,
@@ -24,7 +32,10 @@ class Filter extends Component {
         placeholder="Search by text or tags"
         promptTextCreator={(txt) => `Search for '${txt}'`}
         onChange={(selected) => onChange(selected)}
-        onInputChange={(text) => onTextChange(text)}
+        onInputChange={(text) => {
+          onTextChange(text);
+          return text;
+        }}
         onBlurResetsInput={false}
         onCloseResetsInput={false}
         newOptionCreator={({ label }) => createTextFilter(label)}
