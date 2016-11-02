@@ -240,3 +240,17 @@ const mapStateToProps = (state) => ({
   selectedRows: selectors.getSelectedRows(state)
 });
 ```
+
+## Actions
+
+You can use the below actions to alter the state of the table:
+
+ - `tableDestroyState(tableName)` resets/destroys the current state of the
+   table. This can be used in `componentWillUnmount()` to reset the related
+   redux state.
+
+You can import actions from the sematable module like this:
+
+```javascript
+import { tableDestroyState } from 'sematable';
+```
