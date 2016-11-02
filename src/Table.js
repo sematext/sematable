@@ -25,12 +25,11 @@ class Table extends Component {
       primaryKey,
     } = this.props;
     const className = this.props.className || 'table-sm table-striped table-hover';
-    const styleName = this.props.styleName || '';
     const visibleColumns = columns.filter((c) => !c.hidden);
 
     return (
       <div className="table-responsive">
-        <table styleName={styleName} className={`table ${className}`}>
+        <table className={`table ${className}`}>
           <thead>
             <tr>
               {selectable &&
