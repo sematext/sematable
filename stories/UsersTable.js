@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import sematable, { Table } from '../src';
 
+export const USERS_TABLE = 'usersTable';
 const columns = [
   { key: 'id', primaryKey: true, header: 'ID' },
   { key: 'firstName', header: 'First name', filterable: true, sortable: true },
@@ -13,4 +14,4 @@ class UsersTable extends Component {
     return <Table {...this.props} columns={columns} />;
   }
 }
-export default sematable('usersTable', UsersTable, columns);
+export default sematable(USERS_TABLE, UsersTable, columns);
