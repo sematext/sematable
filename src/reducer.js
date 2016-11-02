@@ -9,6 +9,7 @@ import {
   TABLE_FILTER_CHANGED,
   TABLE_SELECT_ALL_CHANGED,
   TABLE_ROW_CHECKED_CHANGED,
+  TABLE_DESTROY_STATE,
 } from './actions.js';
 
 const defaultState = (configs = {}) => ({
@@ -19,6 +20,7 @@ const defaultState = (configs = {}) => ({
   direction: null,
   selectAll: false,
   userSelection: [],
+  configs,
 });
 
 const behaviours = {
@@ -102,6 +104,7 @@ const behaviours = {
       ],
     };
   },
+  [TABLE_DESTROY_STATE]: (state) => defaultState(state.configs),
 };
 
 const tableReducer = handleActions(behaviours);
