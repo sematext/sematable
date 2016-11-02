@@ -104,7 +104,10 @@ const behaviours = {
       ],
     };
   },
-  [TABLE_DESTROY_STATE]: (state) => defaultState(state.configs),
+  [TABLE_DESTROY_STATE]: (state) => ({
+    ...state,
+    ...defaultState(state.configs),
+  }),
 };
 
 const tableReducer = handleActions(behaviours);
