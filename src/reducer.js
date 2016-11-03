@@ -19,6 +19,7 @@ const defaultState = (configs = {}) => ({
   page: 0,
   pageSize: configs.defaultPageSize || 5,
   filter: [],
+  filterText: null,
   sortKey: null,
   direction: null,
   selectAll: false,
