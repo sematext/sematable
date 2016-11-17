@@ -23,58 +23,61 @@ class Pagination extends Component {
       hasPrevious = false;
       hasNext = false;
     }
-    return (
-      <nav>
-        <ul className="pagination pagination-sm">
-          <li className={`page-item ${hasPrevious ? '' : 'disabled'}`}>
-            <a
-              href="#previous"
-              className="page-link"
-              aria-label="Previous"
-              onClick={(e) => {
-                e.preventDefault();
-                if (hasPrevious) {
-                  onPageChange(page - 1);
-                }
-              }}
-            >
-              <span aria-hidden="true">&laquo;</span>
-              <span className="sr-only">Previous</span>
-            </a>
-          </li>
-          {_.times(pageCount, (idx) => (
-            <li key={idx} className={`page-item ${idx === page ? 'active' : ''}`}>
+    if (pageCount > 1) {
+      return (
+        <nav>
+          <ul className="pagination pagination-sm">
+            <li className={`page-item ${hasPrevious ? '' : 'disabled'}`}>
               <a
-                href="#next"
+                href="#previous"
                 className="page-link"
+                aria-label="Previous"
                 onClick={(e) => {
                   e.preventDefault();
-                  onPageChange(idx);
+                  if (hasPrevious) {
+                    onPageChange(page - 1);
+                  }
                 }}
               >
-                {idx + 1}
+                <span aria-hidden="true">&laquo;</span>
+                <span className="sr-only">Previous</span>
               </a>
             </li>
-          ))}
-          <li className={`page-item ${hasNext ? '' : 'disabled'}`}>
-            <a
-              href="#page"
-              className="page-link"
-              aria-label="Next"
-              onClick={(e) => {
-                e.preventDefault();
-                if (hasNext) {
-                  onPageChange(page + 1);
-                }
-              }}
-            >
-              <span aria-hidden="true">&raquo;</span>
-              <span className="sr-only">Next</span>
-            </a>
-          </li>
-        </ul>
-      </nav>
-    );
+            {_.times(pageCount, (idx) => (
+              <li key={idx} className={`page-item ${idx === page ? 'active' : ''}`}>
+                <a
+                  href="#next"
+                  className="page-link"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    onPageChange(idx);
+                  }}
+                >
+                  {idx + 1}
+                </a>
+              </li>
+            ))}
+            <li className={`page-item ${hasNext ? '' : 'disabled'}`}>
+              <a
+                href="#page"
+                className="page-link"
+                aria-label="Next"
+                onClick={(e) => {
+                  e.preventDefault();
+                  if (hasNext) {
+                    onPageChange(page + 1);
+                  }
+                }}
+              >
+                <span aria-hidden="true">&raquo;</span>
+                <span className="sr-only">Next</span>
+              </a>
+            </li>
+          </ul>
+        </nav>
+      );
+    }
+    return null;
   }
 }
 
