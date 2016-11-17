@@ -143,6 +143,7 @@ const sematable = (tableName, TableComponent, columns, configs = {}) => {
       const {
         showPageSize = true,
         showFilter = true,
+        autoHidePagination = true,
       } = configs;
 
       if (!isInitialized) {
@@ -203,6 +204,7 @@ const sematable = (tableName, TableComponent, columns, configs = {}) => {
           <div className="col-md-12">
             <Pagination
               {...pageInfo}
+              autoHidePagination={autoHidePagination}
               onPageChange={(p) => onPageChange(p)}
             />
           </div>

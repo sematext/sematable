@@ -6,6 +6,7 @@ const propTypes = {
   pageCount: PropTypes.number.isRequired,
   pageSize: PropTypes.number.isRequired,
   onPageChange: PropTypes.func.isRequired,
+  autoHidePagination: PropTypes.bool,
 };
 
 class Pagination extends Component {
@@ -14,6 +15,7 @@ class Pagination extends Component {
       page,
       pageSize,
       onPageChange,
+      autoHidePagination,
     } = this.props;
     let { pageCount } = this.props;
     let hasPrevious = page > 0;
@@ -23,7 +25,7 @@ class Pagination extends Component {
       hasPrevious = false;
       hasNext = false;
     }
-    if (pageCount > 1) {
+    if (pageCount > 1 || !autoHidePagination) {
       return (
         <nav>
           <ul className="pagination pagination-sm">
