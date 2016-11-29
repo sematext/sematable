@@ -91,13 +91,14 @@ const sematable = (tableName, TableComponent, columns, configs = {}) => {
     onNewFilterValue: (data) => dispatch(tableSetFilter(tableName, data)),
     onSelectAllChange: () => dispatch(tableSelectAllChanged(tableName)),
     onRowCheckedChange: (row) => dispatch(tableRowCheckedChanged(tableName, row)),
-    onInitialize: (data) => dispatch(tableInitialize(tableName, data, columns, configs)),
+    onInitialize: (data, filterValue) =>
+      dispatch(tableInitialize(tableName, data, columns, configs, filterValue)),
   });
 
   class DataTable extends Component {
     componentWillMount() {
-      const { data, onInitialize } = this.props;
-      onInitialize(data);
+      const { data, filterValue, onInitialize } = this.props;
+      onInitialize(data, filterValue);
     }
 
     componentWillReceiveProps(nextProps) {

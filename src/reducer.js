@@ -27,6 +27,14 @@ const defaultState = (configs = {}) => ({
   configs,
 });
 
+const filterValueToFilter = (filterValue, columnMap) => filterValue.map(f => {
+  if (_.isString(f)) {
+    return createTextFilter(f);
+  }
+  const column = columnMap[f.key];
+  return createValueFilter(column, f.value);
+});
+
 const behaviours = {
   [TABLE_INITIALIZE]: (state = {}, { payload }) => {
     const nextState = {
@@ -35,6 +43,8 @@ const behaviours = {
       ...payload,
     };
     const primaryKeyCol = _.find(nextState.columns, 'primaryKey');
+    const columnMap = _.keyBy(nextState.columns, 'key');
+    const filter = filterValueToFilter(payload.filterValue, columnMap);
     if (!primaryKeyCol) {
       const msg = 'One column must be marked as primary with "primaryKey" for' +
                   ` data table ${nextState.tableName}.`;
@@ -43,6 +53,7 @@ const behaviours = {
 
     return {
       ...nextState,
+      filter,
       primaryKey: primaryKeyCol.key,
     };
   },
@@ -52,13 +63,7 @@ const behaviours = {
   }),
   [TABLE_SET_FILTER]: (state, { payload }) => {
     const columnMap = _.keyBy(state.columns, 'key');
-    const filter = payload.filterValue.map(f => {
-      if (_.isString(f)) {
-        return createTextFilter(f);
-      }
-      const column = columnMap[f.key];
-      return createValueFilter(column, f.value);
-    });
+    const filter = filterValueToFilter(payload.filterValue, columnMap);
     return {
       ...state,
       filter,

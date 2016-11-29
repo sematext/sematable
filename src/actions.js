@@ -10,13 +10,14 @@ export const TABLE_SELECT_ALL_CHANGED = 'sematable/TABLE_SELECT_ALL_CHANGED';
 export const TABLE_DESTROY_STATE = 'sematable/TABLE_DESTROY_STATE';
 export const TABLE_SET_FILTER = 'sematable/TABLE_SET_FILTER';
 
-export const tableInitialize = (tableName, initialData, columns, configs) => ({
+export const tableInitialize = (tableName, initialData, columns, configs, filterValue) => ({
   type: TABLE_INITIALIZE,
   payload: {
     tableName,
     initialData,
     columns,
     configs,
+    filterValue,
   },
 });
 
