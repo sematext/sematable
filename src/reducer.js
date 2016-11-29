@@ -27,7 +27,7 @@ const defaultState = (configs = {}) => ({
   configs,
 });
 
-const filterValueToFilter = (filterValue, columnMap) => filterValue.map(f => {
+const filterValueToFilter = (filterValue = [], columnMap) => filterValue.map(f => {
   if (_.isString(f)) {
     return createTextFilter(f);
   }
