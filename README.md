@@ -12,7 +12,19 @@ Sematable wraps a table component, and provides:
 Redux, so filters, sort info, selected rows, and pagination info survives route
 navigations.
 
+[More About Sematable](https://sematext.com/blog/2016/12/07/reactjs-redux-table-sematable/)
+
 ![](https://nodei.co/npm/sematable.png?downloads=true&downloadRank=true&stars=true)
+
+## Getting Started
+
+If you would like to simply test the table alone in your browser, we have included React Storybook.
+
+```
+npm install
+npm run storybook 
+```
+Then open your browser to http://localhost:6006/. Try to delete the search filters and watch how the table responds.
 
 ## Reducer
 
