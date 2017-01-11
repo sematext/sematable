@@ -147,6 +147,8 @@ The `sematable(tableName, component, columns, configs)` wrapper accepts three pa
  - _filterContainerClassName_ css class for the filter component container element ('col-md-6' by default)
  - _pageSizeClassName_ css class for the page size component ('col-md-6' by default)
  - _pageSizeContainerClassName_ css class for the page size component container element ('col-md-6' by default)
+ - _sortKey_ default column to sort by (not sorted by default)
+ - _sortDirection_ default sort direction, `asc` or `desc` (`asc` by default)
 
 There's no requirement that the wrapped component needs to be a table, it could
 be a list, a div, an image gallery, or anything else.
