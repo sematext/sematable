@@ -3,6 +3,7 @@ import React, { Component, PropTypes } from 'react';
 const propTypes = {
   pageSize: PropTypes.number.isRequired,
   onChange: PropTypes.func.isRequired,
+  className: PropTypes.string,
 };
 
 class PageSize extends Component {
@@ -10,10 +11,11 @@ class PageSize extends Component {
     const {
       pageSize,
       onChange,
+      className = 'col-md-6',
     } = this.props;
     return (
       <div
-        className="col-md-6"
+        className={className}
         style={{
           margin: '1rem 0 1rem 0',
         }}

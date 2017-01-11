@@ -137,12 +137,16 @@ The `sematable(tableName, component, columns, configs)` wrapper accepts three pa
  - _columns_ is an array of column definitions
  - _configs_ is an optional object where you can specify configuration properties
 
-Configuration properties:
+### Configuration properties:
 
  - _showPageSize_ if page size select should be shown
  - _showFilter_ if text filter field should be shown
  - _defaultPageSize_ overrides the default page size (if not specified 5 will be used)
  - _autoHidePagination_ if pagination should be hidden if the number of pages is 1 (default is true, which means pagination is hidden if the number of pages is equal to 1)
+ - _filterClassName_ css class for the filter component
+ - _filterContainerClassName_ css class for the filter component container element ('col-md-6' by default)
+ - _pageSizeClassName_ css class for the page size component ('col-md-6' by default)
+ - _pageSizeContainerClassName_ css class for the page size component container element ('col-md-6' by default)
 
 There's no requirement that the wrapped component needs to be a table, it could
 be a list, a div, an image gallery, or anything else.

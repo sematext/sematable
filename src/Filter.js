@@ -7,6 +7,7 @@ const propTypes = {
   onChange: PropTypes.func.isRequired,
   onTextChange: PropTypes.func.isRequired,
   options: PropTypes.array.isRequired,
+  className: PropTypes.string,
 };
 
 class Filter extends Component {
@@ -24,9 +25,11 @@ class Filter extends Component {
       onChange,
       onTextChange,
       options,
+      className,
     } = this.props;
     return (
       <Creatable
+        className={className}
         options={options}
         noResultsText="Type text to search, press Enter to save as filter"
         placeholder="Search by text or tags"

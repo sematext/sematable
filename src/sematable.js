@@ -145,6 +145,10 @@ const sematable = (tableName, TableComponent, columns, configs = {}) => {
         showPageSize = true,
         showFilter = true,
         autoHidePagination = true,
+        pageSizeContainerClassName = 'col-md-6',
+        filterContainerClassName = 'col-md-6',
+        pageSizeClassName,
+        filterClassName,
       } = configs;
 
       if (!isInitialized) {
@@ -178,14 +182,16 @@ const sematable = (tableName, TableComponent, columns, configs = {}) => {
 
       return (
         <div className="row">
-          <div className="col-md-6">
+          <div className={pageSizeContainerClassName}>
             {showPageSize && <PageSize
+              className={pageSizeClassName}
               pageSize={pageInfo.pageSize}
               onChange={(f) => onPageSizeChange(f)}
             />}
           </div>
-          <div className="col-md-6">
+          <div className={filterContainerClassName}>
             {showFilter && <Filter
+              className={filterClassName}
               value={filter}
               options={filterOptions}
               onChange={(f) => onFilterChange(f)}
