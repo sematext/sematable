@@ -34,7 +34,7 @@ combine the provided reducer in your root reducer like this:
 ```javascript
 import { reducer as sematable } from 'sematable';
 
-const reducer = combineReducer({
+const reducer = combineReducers({
   sematable,
   ...
 });
