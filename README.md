@@ -184,10 +184,10 @@ import sematable, {
   SelectRow,
 } from 'sematable';
 
-const columns = {
-  id: { header: 'ID', searchable: true, sortable: true, primaryKey: true },
-  name: { header: 'Name', searchable: true, sortable: true },
-};
+const columns = [
+  { key: 'id', header: 'ID', searchable: true, sortable: true, primaryKey: true },
+  { key: 'name', header: 'Name', searchable: true, sortable: true },
+];
 
 const propTypes = {
   headers: PropTypes.object.isRequired,
