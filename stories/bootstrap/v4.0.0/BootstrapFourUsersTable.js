@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-import sematable, { Table } from '../src';
-import YesNo from './YesNo.js';
-import './style.css';
+import sematable, { Table } from '../../../src';
+import YesNo from '../../common/YesNo.js';
+import './css/bootstrap.min.css';
 
-export const USERS_TABLE = 'usersTable';
+
+export const BOOTSTRAP_FOUR_USERS_TABLE = 'bootstrapFourUsersTable';
 const columns = [
   { key: 'id', primaryKey: true, header: 'ID' },
   { key: 'firstName', header: 'First name', searchable: true, sortable: true },
@@ -32,9 +33,9 @@ const columns = [
   },
 ];
 
-class UsersTable extends Component {
+class BootstrapFourUsersTable extends Component {
   render() {
     return <Table {...this.props} columns={columns} />;
   }
 }
-export default sematable(USERS_TABLE, UsersTable, columns);
+export default sematable(BOOTSTRAP_FOUR_USERS_TABLE, BootstrapFourUsersTable, columns);

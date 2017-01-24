@@ -24,7 +24,7 @@ If you would like to simply test the table alone in your browser, we have includ
 npm install
 npm run storybook 
 ```
-Then open your browser to http://localhost:6006/. Try to delete the search filters and watch how the table responds.
+Then open your browser to http://localhost:6006/. There are several stories featuring Filters, Bootstrap, and Editable cells. 
 
 ## Reducer
 
