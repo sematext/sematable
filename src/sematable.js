@@ -130,6 +130,7 @@ const sematable = (tableName, TableComponent, columns, configs = {}) => {
         selectedRows,
         primaryKey,
         filterOptions,
+        data,
 
         /* actions */
         onPageChange,
