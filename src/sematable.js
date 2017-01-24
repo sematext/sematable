@@ -130,6 +130,7 @@ const sematable = (tableName, TableComponent, columns, configs = {}) => {
         selectedRows,
         primaryKey,
         filterOptions,
+        data,
 
         /* actions */
         onPageChange,
@@ -186,6 +187,7 @@ const sematable = (tableName, TableComponent, columns, configs = {}) => {
             {showPageSize && <PageSize
               className={pageSizeClassName}
               pageSize={pageInfo.pageSize}
+              totalSize={data.length}
               onChange={(f) => onPageSizeChange(f)}
             />}
           </div>
