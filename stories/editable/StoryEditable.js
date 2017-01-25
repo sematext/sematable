@@ -21,6 +21,9 @@ const StoryEditable = () => (
         <UsersTable
           data={users}
         />
+        <div>
+          <p>Contributed by <a href="https://github.com/headwinds" target="_blank">headwinds</a></p>
+        </div>
       </div>
     </Provider>
   )

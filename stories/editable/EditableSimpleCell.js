@@ -1,5 +1,9 @@
 import React, { PropTypes } from 'react';
 
+/*
+This is a failed experiment to do simple version - see EditableCell instead
+*/
+
 const handleChange = (event) => {
   event.preventDefault(); 
   let value = event.target.value;

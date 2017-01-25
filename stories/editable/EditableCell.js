@@ -3,23 +3,21 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
 
+require ('./EditableCell.css');
+
 class EditibleCell extends Component {
 
   constructor(props){
     super(props);
-    console.log("Landing - constructor props: ", props);
     this.handleChange = this.handleChange.bind(this);
 
     this.sematable = this.props.sematable;
     this.row = this.props.row;
     this.state = {value: (this.row.confirmed) ? "You're on the list" : "Who are you?!" }; 
-    console.log("EditibleCell props: ", props);
-    console.log("EditibleCell state: ", this.state);
   }
 
   handleChange(event){
     event.preventDefault(); 
-    console.log("EditibleUsersTable handleChange event.target: ", event.target.value);
     this.setState( {
       value: event.target.value
     });
@@ -30,9 +28,13 @@ class EditibleCell extends Component {
   render(){
 
     const {value} = this.state; 
+    const statusClass = (this.row.confirmed) ? "confirmed" : "denied";
+    const classNames = "editableCellContainer " + statusClass;
 
     return(
-      <input type="text" value={value} onChange={this.handleChange} />
+      <div className={classNames}>
+        <input className="editableCell" type="text" value={value} onChange={this.handleChange} />
+      </div>
     )
   }
 

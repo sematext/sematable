@@ -1,13 +1,17 @@
 import React from 'react';
 import { action } from '@kadira/storybook';
+require ('./button.css');
 
 /*
-note: While this has nothing to do with Sematable right now, it's a cute example and demonstrates how to use Storybook to test and isolate components
-This example could be used as the basis to test out the header toolbars or other complimentary compliments besides the table itself
+A simple example of how you can use Storybook to isolate and test individual components
 */
 
+
 const StoryButton = () => (
-    <button onClick={action('clicked')}>😀 😎 👍 💯</button>
+  <div>
+    <h3 className="aboutSimpleStoryButton">A simple example of how you can use Storybook to isolate and test individual components</h3>
+    <button className="simpleStoryButton" onClick={action('clicked')}>😀 😎 👍 💯</button>
+  </div>
   )
 
 export default StoryButton;

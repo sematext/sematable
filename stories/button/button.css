@@ -1,0 +1,14 @@
+.simpleStoryButton {
+  display: block;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+  margin: 20px;
+  background-color: white;
+  padding: 10px;
+}
+
+.aboutSimpleStoryButton{
+  font-style: Georgia;
+  font-size: 16px;
+  margin: 20px;
+}
