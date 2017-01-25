@@ -1,5 +1,6 @@
 import { configure } from '@kadira/storybook';
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
+import '../node_modules/font-awesome/css/font-awesome.css';
 import '../node_modules/react-select/dist/react-select.min.css';
 
 function loadStories() {
