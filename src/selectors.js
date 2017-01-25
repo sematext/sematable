@@ -68,7 +68,7 @@ function sort(rows, { sortKey, direction }) {
     if (_.get(a, sortKey) < _.get(b, sortKey)) {
       sortVal = -1;
     }
-    if (direction === 'asc') {
+    if (direction === 'desc') {
       sortVal *= -1;
     }
     return sortVal;
