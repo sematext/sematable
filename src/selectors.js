@@ -60,17 +60,22 @@ function sort(rows, { sortKey, direction }) {
   if (!sortKey) {
     return cloned;
   }
+
   return cloned.sort((a, b) => {
     let sortVal = 0;
-    if (_.get(a, sortKey) > _.get(b, sortKey)) {
+    const valueA = _.get(a, sortKey);
+    const valueB = _.get(b, sortKey);
+
+    if (valueA > valueB || valueB === undefined) {
       sortVal = 1;
-    }
-    if (_.get(a, sortKey) < _.get(b, sortKey)) {
+    } else if (valueA < valueB || valueA === undefined) {
       sortVal = -1;
     }
+
     if (direction === 'desc') {
       sortVal *= -1;
     }
+
     return sortVal;
   });
 }
