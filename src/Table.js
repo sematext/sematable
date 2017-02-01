@@ -13,6 +13,7 @@ const propTypes = {
   selectEnabled: PropTypes.func,
   className: PropTypes.string,
   styleName: PropTypes.string,
+  CheckboxComponent: PropTypes.func,
 };
 
 class Table extends Component {
@@ -23,6 +24,7 @@ class Table extends Component {
       headers,
       columns,
       primaryKey,
+      CheckboxComponent,
     } = this.props;
     const className = this.props.className || 'table-sm table-striped table-hover';
     const visibleColumns = columns.filter((c) => !c.hidden);
@@ -33,7 +35,10 @@ class Table extends Component {
           <thead>
             <tr>
               {selectable &&
-                <SelectAllHeader {...headers.select} />
+                <SelectAllHeader
+                  {...headers.select}
+                  CheckboxComponent={CheckboxComponent}
+                />
               }
               {visibleColumns.map((col) => {
                 if (col.sortable && !col.hidden) {

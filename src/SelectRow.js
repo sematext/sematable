@@ -5,6 +5,7 @@ const propTypes = {
   isSelected: PropTypes.func.isRequired,
   row: PropTypes.object.isRequired,
   isEnabled: PropTypes.func,
+  CheckboxComponent: PropTypes.func,
 };
 
 class SelectRow extends Component {
@@ -14,18 +15,26 @@ class SelectRow extends Component {
       isSelected,
       isEnabled,
       row,
+      CheckboxComponent,
     } = this.props;
     const checked = isSelected(row);
     if (!isEnabled || isEnabled(row)) {
-      return (
-        <input
+      if (CheckboxComponent) {
+        return (<CheckboxComponent
           type="checkbox"
           checked={checked}
           onChange={() =>
             onRowCheckedChange(row)
           }
-        />
-      );
+        />);
+      }
+      return (<input
+        type="checkbox"
+        checked={checked}
+        onChange={() =>
+          onRowCheckedChange(row)
+        }
+      />);
     }
     return null;
   }
