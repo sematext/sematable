@@ -8,6 +8,7 @@ const propTypes = {
   row: PropTypes.object.isRequired,
   headers: PropTypes.object.isRequired,
   columns: PropTypes.array.isRequired,
+  CheckboxComponent: PropTypes.func,
 };
 
 const resolveProps = (row, componentProps) => {
@@ -29,6 +30,7 @@ class TableRow extends Component {
       selectEnabled,
       headers,
       columns,
+      CheckboxComponent,
     } = this.props;
     const select = headers.select;
     const visibleColumns = columns.filter((c) => !c.hidden);
@@ -41,7 +43,12 @@ class TableRow extends Component {
       <tr className={className}>
         {selectable &&
           <td key="select">
-            <SelectRow row={row} isEnabled={selectEnabled} {...select} />
+            <SelectRow
+              row={row}
+              isEnabled={selectEnabled}
+              CheckboxComponent={CheckboxComponent}
+              {...select}
+            />
           </td>
         }
         {visibleColumns.map((col) =>

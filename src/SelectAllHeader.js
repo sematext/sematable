@@ -4,6 +4,7 @@ const propTypes = {
   onSelectAllChange: PropTypes.func.isRequired,
   selectAll: PropTypes.bool.isRequired,
   selectedRows: PropTypes.array.isRequired,
+  CheckboxComponent: PropTypes.func,
 };
 
 class SelectAllHeader extends Component {
@@ -12,7 +13,19 @@ class SelectAllHeader extends Component {
       onSelectAllChange,
       selectedRows,
       selectAll,
+      CheckboxComponent,
     } = this.props;
+    if (CheckboxComponent) {
+      return (
+        <th>
+          <CheckboxComponent
+            type="checkbox"
+            checked={selectAll}
+            onChange={onSelectAllChange}
+          /> <span className="text-muted">({selectedRows.length})</span>
+        </th>
+      );
+    }
     return (
       <th>
         <input
