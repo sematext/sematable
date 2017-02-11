@@ -147,7 +147,7 @@ If you just need to show tabular data, with some actions for each row, you can
 use the provided `Table` component in combination with the `sematable` wrapper
 as shown above.  Otherwise, you can write the table structure yourself.
 
-The `sematable(tableName, component, columns, configs)` wrapper accepts three parameters:
+The `sematable(tableName, component, columns, configs)` wrapper accepts four parameters:
 
  - _tableName_ is a unique name for this table (used to store state)
  - _component_ is the table component you want to wrap
