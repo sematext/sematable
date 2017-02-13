@@ -1,0 +1,26 @@
+.editableCellContainer {
+  display: block;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+}
+
+.editableCell {
+  padding: 5px;
+  border: none;
+  width: 100%;
+  background-color: transparent;
+  
+}
+
+.confirmed {
+  background-color: #d3f7a9;
+  color: #000;
+}
+
+.denied {
+  background-color: #ffe495;
+}
+
+:focus {
+  outline: none;
+};
