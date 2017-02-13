@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 
 const propTypes = {
   sortKey: PropTypes.string.isRequired,
-  name: PropTypes.string.isRequired,
+  name: PropTypes.node.isRequired,
   handleClick: PropTypes.func.isRequired,
   sorted: PropTypes.string,
 };
