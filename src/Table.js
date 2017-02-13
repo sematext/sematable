@@ -41,9 +41,23 @@ class Table extends Component {
             }
             {visibleColumns.map((col) => {
               if (col.sortable && !col.hidden) {
-                return (<SortableHeader key={col.key} {...headers[col.key]} />);
+                return (
+                  <SortableHeader
+                    key={col.key}
+                    title={col.title}
+                    {...headers[col.key]}
+                  />);
               }
-              return (<th data-key={col.key} key={col.key}>{col.header}</th>);
+              return (
+                <th
+                  data-key={col.key}
+                  key={col.key}
+                  title={col.title}
+                  data-toggle="tooltip"
+                >
+                  {col.header}
+                </th>
+              );
             })}
           </tr>
         </thead>

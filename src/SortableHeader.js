@@ -5,6 +5,7 @@ const propTypes = {
   name: PropTypes.node.isRequired,
   handleClick: PropTypes.func.isRequired,
   sorted: PropTypes.string,
+  title: PropTypes.string,
 };
 
 class SortableHeader extends Component {
@@ -13,6 +14,7 @@ class SortableHeader extends Component {
       sortKey,
       name,
       sorted,
+      title,
       handleClick,
     } = this.props;
     return (
@@ -21,6 +23,7 @@ class SortableHeader extends Component {
         style={{
           cursor: 'pointer',
         }}
+        title={title}
         onClick={() => handleClick(sortKey)}
       >
         <span style={{ marginRight: '5px' }}>

@@ -7,7 +7,13 @@ export const USERS_TABLE = 'usersTable';
 const columns = [
   { key: 'id', primaryKey: true, header: 'ID' },
   { key: 'firstName', header: 'First name', searchable: true, sortable: true },
-  { key: 'lastName', header: 'Last name', searchable: true, sortable: true },
+  {
+    key: 'lastName',
+    header: 'Last name',
+    searchable: true,
+    sortable: true,
+    title: 'Long last name explanation',
+  },
   {
     key: 'status',
     header: 'Status',
@@ -27,6 +33,7 @@ const columns = [
     key: 'confirmed',
     header: 'Confirmed',
     Component: YesNo,
+    title: 'This is some longer explanation',
     filterable: true,
     getFilterTitle: (value) => value ? 'Confirmed' : 'Not confirmed',
   },

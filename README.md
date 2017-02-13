@@ -127,6 +127,7 @@ Columns definitions have the following properties:
 
  - _key_ is the name of the property used in row objects
  - _header_ is the header label that will be used for this column
+ - _title_ is the title that will be used when column header is hovered
  - _sortable_ defines if user should be able to sort by this column
  - _searchable_ defines if user should be able to text-search by this column (simple case-insensitive substring search)
  - _primaryKey_ defines if this column is the primary key
