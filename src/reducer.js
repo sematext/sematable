@@ -18,6 +18,7 @@ import { createTextFilter, createValueFilter } from './common';
 const defaultState = (configs = {}) => ({
   page: 0,
   pageSize: configs.defaultPageSize || 5,
+  pageSizes: configs.defaultPageSizes || [5, 10, 50, 100, -1],
   filter: [],
   filterText: null,
   sortKey: configs.sortKey,

@@ -95,6 +95,7 @@ export default (tableName) => {
   const getPage = (state) => tableProp(state, 'page');
   const getPrimaryKey = (state) => tableProp(state, 'primaryKey');
   const getPageSize = (state) => tableProp(state, 'pageSize');
+  const getPageSizes = (state) => tableProp(state, 'pageSizes');
   const getUserSelection = (state) => tableProp(state, 'userSelection');
   const getSelectAll = (state) => tableProp(state, 'selectAll');
   const getSortInfo = (state) => ({
@@ -160,7 +161,8 @@ export default (tableName) => {
     getPage,
     getPageSize,
     getFiltered,
-    (page, pageSize, filtered) => {
+    getPageSizes,
+    (page, pageSize, filtered, pageSizes) => {
       if (pageSize === -1) {
         // we are showing all rows
         return {
@@ -180,6 +182,7 @@ export default (tableName) => {
       return {
         page: validPage,
         pageSize,
+        pageSizes,
         pageCount,
       };
     }
