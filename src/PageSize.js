@@ -38,7 +38,12 @@ class PageSize extends Component {
           <option value={100}>100</option>
           <option value={-1}>All</option>
         </select>
-        <span className="sema-label">{`${pageSize !== -1 ? ' of' : ''} ${totalSize}`}</span>
+        <span
+          className="sema-label"
+          style={{ whiteSpace: 'nowrap' }}
+        >
+          {`${pageSize !== -1 ? ' of' : ''} ${totalSize}`}
+        </span>
       </div>
     );
   }
