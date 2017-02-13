@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import sematable, { Table } from '../src';
+import sematable, { Table } from '../../src';
 import YesNo from './YesNo.js';
 import './style.css';
 
