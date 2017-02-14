@@ -9,7 +9,7 @@ const propTypes = {
   className: PropTypes.string,
 };
 
-const PAGE_SIZE_ALL = -1;
+export const PAGE_SIZE_ALL_VALUE = -1;
 
 class PageSize extends Component {
   render() {
@@ -43,7 +43,7 @@ class PageSize extends Component {
                 value={size}
                 key={i}
               >
-                {size === PAGE_SIZE_ALL ? 'All' : size}
+                {size === PAGE_SIZE_ALL_VALUE ? 'All' : size}
               </option>
             ))
           }

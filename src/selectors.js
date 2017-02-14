@@ -2,6 +2,8 @@ import _ from 'lodash';
 import { createSelector } from 'reselect';
 import { createValueFilter } from './common';
 
+import { PAGE_SIZE_ALL_VALUE } from './PageSize';
+
 function paginate(rows, { page, pageSize }) {
   if (pageSize < 1) {
     return rows.slice(0);
@@ -163,11 +165,12 @@ export default (tableName) => {
     getFiltered,
     getPageSizes,
     (page, pageSize, filtered, pageSizes) => {
-      if (pageSize === -1) {
+      if (pageSize === PAGE_SIZE_ALL_VALUE) {
         // we are showing all rows
         return {
           page,
           pageSize,
+          pageSizes,
           pageCount: 1,
         };
       }
