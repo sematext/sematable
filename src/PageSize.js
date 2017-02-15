@@ -1,16 +1,21 @@
 import React, { Component, PropTypes } from 'react';
+import _ from 'lodash';
 
 const propTypes = {
   pageSize: PropTypes.number.isRequired,
+  pageSizes: PropTypes.array.isRequired,
   totalSize: PropTypes.number.isRequired,
   onChange: PropTypes.func.isRequired,
   className: PropTypes.string,
 };
 
+export const PAGE_SIZE_ALL_VALUE = -1;
+
 class PageSize extends Component {
   render() {
     const {
       pageSize,
+      pageSizes,
       totalSize,
       onChange,
       className = 'col-md-6',
@@ -32,11 +37,16 @@ class PageSize extends Component {
             margin: '0 0 0 5px',
           }}
         >
-          <option value={5}>5</option>
-          <option value={10}>10</option>
-          <option value={50}>50</option>
-          <option value={100}>100</option>
-          <option value={-1}>All</option>
+          {
+            _.map(pageSizes, (size, i) => (
+              <option
+                value={size}
+                key={i}
+              >
+                {size === PAGE_SIZE_ALL_VALUE ? 'All' : size}
+              </option>
+            ))
+          }
         </select>
         <span
           className="sema-label"

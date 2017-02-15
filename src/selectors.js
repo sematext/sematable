@@ -2,6 +2,8 @@ import _ from 'lodash';
 import { createSelector } from 'reselect';
 import { createValueFilter } from './common';
 
+import { PAGE_SIZE_ALL_VALUE } from './PageSize';
+
 function paginate(rows, { page, pageSize }) {
   if (pageSize < 1) {
     return rows.slice(0);
@@ -95,6 +97,7 @@ export default (tableName) => {
   const getPage = (state) => tableProp(state, 'page');
   const getPrimaryKey = (state) => tableProp(state, 'primaryKey');
   const getPageSize = (state) => tableProp(state, 'pageSize');
+  const getPageSizes = (state) => tableProp(state, 'pageSizes');
   const getUserSelection = (state) => tableProp(state, 'userSelection');
   const getSelectAll = (state) => tableProp(state, 'selectAll');
   const getSortInfo = (state) => ({
@@ -160,12 +163,14 @@ export default (tableName) => {
     getPage,
     getPageSize,
     getFiltered,
-    (page, pageSize, filtered) => {
-      if (pageSize === -1) {
+    getPageSizes,
+    (page, pageSize, filtered, pageSizes) => {
+      if (pageSize === PAGE_SIZE_ALL_VALUE) {
         // we are showing all rows
         return {
           page,
           pageSize,
+          pageSizes,
           pageCount: 1,
         };
       }
@@ -180,6 +185,7 @@ export default (tableName) => {
       return {
         page: validPage,
         pageSize,
+        pageSizes,
         pageCount,
       };
     }
