@@ -25,7 +25,7 @@ function filter(rows = [], filters = [], filterText, columns) {
   }
 
   const textFilters = [
-    ...(filterText ? [filterText] : []),
+    ...(filterText ? [filterText.toLowerCase()] : []),
     ...filters.filter(f => f.textFilter).map(f => f.value),
   ];
 
