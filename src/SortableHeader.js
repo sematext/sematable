@@ -20,6 +20,7 @@ class SortableHeader extends Component {
     return (
       <th
         data-key={sortKey}
+        data-toggle={title ? 'tooltip' : ''}
         style={{
           cursor: 'pointer',
         }}

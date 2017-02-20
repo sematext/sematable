@@ -53,7 +53,7 @@ class Table extends Component {
                   data-key={col.key}
                   key={col.key}
                   title={col.title}
-                  data-toggle="tooltip"
+                  data-toggle={col.title ? 'tooltip' : ''}
                 >
                   {col.header}
                 </th>
