@@ -18,7 +18,7 @@ class PageSize extends Component {
       pageSizes,
       totalSize,
       onChange,
-      className = 'col-md-6',
+      className,
     } = this.props;
     return (
       <div
