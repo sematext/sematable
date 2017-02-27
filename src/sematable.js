@@ -140,7 +140,7 @@ const sematable = (tableName, TableComponent, columns, configs = {}) => {
         onHeaderClick,
         onRowCheckedChange,
         onSelectAllChange,
-        ...otherProps
+        ...otherProps,
       } = this.props;
       const {
         showPageSize = true,
@@ -150,6 +150,7 @@ const sematable = (tableName, TableComponent, columns, configs = {}) => {
         filterContainerClassName = 'col-md-6',
         pageSizeClassName,
         filterClassName,
+        filterPlaceholder,
       } = configs;
 
       if (!isInitialized) {
@@ -167,6 +168,7 @@ const sematable = (tableName, TableComponent, columns, configs = {}) => {
       };
 
       const columnMap = _.keyBy(columns, 'key');
+      const hasFilterable = _.some(columns, 'filterable');
       const columnHeaders = _.mapValues(columnMap, (value, key) => ({
         sorted: key === sortInfo.sortKey ? sortInfo.direction : null,
         sortKey: key,
@@ -199,6 +201,8 @@ const sematable = (tableName, TableComponent, columns, configs = {}) => {
               options={filterOptions}
               onChange={(f) => onFilterChange(f)}
               onTextChange={(f) => onFilterTextChange(f)}
+              hasFilterable={hasFilterable}
+              placeholder={filterPlaceholder}
             />}
           </div>
           <div className="col-md-12">

@@ -165,6 +165,7 @@ The `sematable(tableName, component, columns, configs)` wrapper accepts four par
  - _autoHidePagination_ if pagination should be hidden if the number of pages is 1 (default is true, which means pagination is hidden if the number of pages is equal to 1)
  - _filterClassName_ css class for the filter component
  - _filterContainerClassName_ css class for the filter component container element ('col-md-6' by default)
+ - _filterPlaceholder_ filter placeholder text
  - _pageSizeClassName_ css class for the page size component ('col-md-6' by default)
  - _pageSizeContainerClassName_ css class for the page size component container element ('col-md-6' by default)
  - _sortKey_ default column to sort by (not sorted by default)

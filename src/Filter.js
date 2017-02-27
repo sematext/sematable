@@ -8,6 +8,8 @@ const propTypes = {
   onTextChange: PropTypes.func.isRequired,
   options: PropTypes.array.isRequired,
   className: PropTypes.string,
+  hasFilterable: PropTypes.bool,
+  placeholder: PropTypes.string,
 };
 
 class Filter extends Component {
@@ -26,13 +28,16 @@ class Filter extends Component {
       onTextChange,
       options,
       className,
+      hasFilterable,
+      placeholder,
     } = this.props;
+    const defaultPlaceholder = hasFilterable ? 'Search by text or tags' : 'Search by text';
     return (
       <Creatable
         className={className}
         options={options}
         noResultsText="Type text to search, press Enter to save as filter"
-        placeholder="Search by text or tags"
+        placeholder={placeholder || defaultPlaceholder}
         promptTextCreator={(txt) => `Search for '${txt}'`}
         onChange={(selected) => onChange(selected)}
         onInputChange={(text) => {
