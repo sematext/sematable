@@ -324,3 +324,25 @@ dispatch(tableSetFilter('usersTable', [
   { key: 'confirmed', value: true },
 ]));
 ```
+
+## Custom components
+
+`CheckboxComponent` for SelectAllHeader, accepting properties
+```javascript
+{
+  onChange: PropTypes.func,
+  checked: PropTypes.bool,
+  disabled: PropTypes.bool,
+  children: PropTypes.node,
+  className: PropTypes.string,
+  id: PropTypes.string,
+}
+```
+
+`NoDataComponent` for rendering custom messages when there is no data available, accepting properties:
+
+```javascript
+{
+  filter: PropTypes.array // List of applied filters for table
+}
+```

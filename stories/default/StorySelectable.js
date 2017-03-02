@@ -6,6 +6,10 @@ import UsersTable, { USERS_TABLE } from '../common/UsersTable';
 import Checkbox from '../Checkbox';
 import users from '../common/users';
 
+const NoDataComponent = () => (
+  <div>Custom component - No data here (yet)</div>
+);
+
 const reducer = combineReducers({ sematable });
 const store = createStore(reducer);
 const StorySelectable = () => (
@@ -27,6 +31,7 @@ const StorySelectable = () => (
         ]}
         selectable
         CheckboxComponent={Checkbox}
+        NoDataComponent={NoDataComponent}
       />
     </div>
   </Provider>
