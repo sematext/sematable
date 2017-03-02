@@ -186,15 +186,16 @@ const sematable = (tableName, TableComponent, columns, configs = {}) => {
 
       return (
         <div className="row">
-          <div className={pageSizeContainerClassName}>
-            {showPageSize && <PageSize
-              className={pageSizeClassName}
-              pageSize={pageInfo.pageSize}
-              pageSizes={pageInfo.pageSizes}
-              totalSize={data.length}
-              onChange={(f) => onPageSizeChange(f)}
-            />}
-          </div>
+          {showPageSize &&
+            <div className={pageSizeContainerClassName}>
+              <PageSize
+                className={pageSizeClassName}
+                pageSize={pageInfo.pageSize}
+                pageSizes={pageInfo.pageSizes}
+                onChange={(f) => onPageSizeChange(f)}
+              />
+            </div>
+          }
           <div className={filterContainerClassName}>
             {showFilter && <Filter
               className={filterClassName}

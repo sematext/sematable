@@ -16,7 +16,6 @@ class PageSize extends Component {
     const {
       pageSize,
       pageSizes,
-      totalSize,
       onChange,
       className,
     } = this.props;
@@ -48,12 +47,6 @@ class PageSize extends Component {
             ))
           }
         </select>
-        <span
-          className="sema-label"
-          style={{ whiteSpace: 'nowrap' }}
-        >
-          {`${pageSize !== -1 ? ' of' : ''} ${totalSize}`}
-        </span>
       </div>
     );
   }
