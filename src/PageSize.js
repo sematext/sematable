@@ -4,7 +4,6 @@ import _ from 'lodash';
 const propTypes = {
   pageSize: PropTypes.number.isRequired,
   pageSizes: PropTypes.array.isRequired,
-  totalSize: PropTypes.number.isRequired,
   onChange: PropTypes.func.isRequired,
   className: PropTypes.string,
 };
