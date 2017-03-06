@@ -212,6 +212,7 @@ const sematable = (tableName, TableComponent, columns, configs = {}) => {
               headers={headers}
               primaryKey={primaryKey}
               columns={columns}
+              filter={filter}
               {...configs}
             />
           </div>
