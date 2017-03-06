@@ -146,7 +146,7 @@ const sematable = (tableName, TableComponent, columns, configs = {}) => {
         showPageSize = true,
         showFilter = true,
         autoHidePagination = true,
-        pageSizeContainerClassName = 'col-md-6',
+        pageSizeContainerClassName = 'col-md-6 text-right',
         filterContainerClassName = 'col-md-6',
         pageSizeClassName,
         filterClassName,
@@ -186,16 +186,6 @@ const sematable = (tableName, TableComponent, columns, configs = {}) => {
 
       return (
         <div className="row">
-          {showPageSize &&
-            <div className={pageSizeContainerClassName}>
-              <PageSize
-                className={pageSizeClassName}
-                pageSize={pageInfo.pageSize}
-                pageSizes={pageInfo.pageSizes}
-                onChange={(f) => onPageSizeChange(f)}
-              />
-            </div>
-          }
           <div className={filterContainerClassName}>
             {showFilter && <Filter
               className={filterClassName}
@@ -219,11 +209,25 @@ const sematable = (tableName, TableComponent, columns, configs = {}) => {
             />
           </div>
           <div className="col-md-12">
-            <Pagination
-              {...pageInfo}
-              autoHidePagination={autoHidePagination}
-              onPageChange={(p) => onPageChange(p)}
-            />
+            <div className="row">
+              <div className="col-md-6">
+                <Pagination
+                  {...pageInfo}
+                  autoHidePagination={autoHidePagination}
+                  onPageChange={(p) => onPageChange(p)}
+                />
+              </div>
+              {showPageSize &&
+                <div className={pageSizeContainerClassName}>
+                  <PageSize
+                    className={pageSizeClassName}
+                    pageSize={pageInfo.pageSize}
+                    pageSizes={pageInfo.pageSizes}
+                    onChange={(f) => onPageSizeChange(f)}
+                  />
+                </div>
+              }
+            </div>
           </div>
         </div>
       );
