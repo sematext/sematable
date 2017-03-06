@@ -175,6 +175,7 @@ const sematable = (tableName, TableComponent, columns, configs = {}) => {
         primaryKey: value.primaryKey,
         name: value.header,
         sortable: value.sortable,
+        title: value.title,
         handleClick: (k) => onHeaderClick(k),
       }));
 
