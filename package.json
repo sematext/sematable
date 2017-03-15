@@ -9,7 +9,7 @@
     "prepublish": "npm run compile",
     "eslint": "./node_modules/.bin/eslint src",
     "lint": "npm run eslint",
-    "storybook": "BOOTSTRAP_VERSION=4.0.0 start-storybook -p 6006",
+    "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook"
   },
   "repository": {
