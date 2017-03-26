@@ -12,6 +12,8 @@ Sematable wraps a table component, and provides:
 Redux, so filters, sort info, selected rows, and pagination info survives route
 navigations.
 
+![image](https://cloud.githubusercontent.com/assets/497926/24330201/a156edec-1219-11e7-877b-e0c4c49fd947.png)
+
 [More About Sematable](https://sematext.com/blog/2016/12/07/reactjs-redux-table-sematable/)
 
 ![](https://nodei.co/npm/sematable.png?downloads=true&downloadRank=true&stars=true)
