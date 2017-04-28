@@ -140,7 +140,7 @@ const sematable = (tableName, TableComponent, columns, configs = {}) => {
         onHeaderClick,
         onRowCheckedChange,
         onSelectAllChange,
-        ...otherProps,
+        ...otherProps
       } = this.props;
       const {
         showPageSize = true,
