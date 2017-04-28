@@ -52,7 +52,7 @@ class TableRow extends Component {
           </td>
         }
         {visibleColumns.map((col) =>
-          <td key={col.key}>
+          <td key={col.key} className={col.className}>
             {col.Component ?
               <col.Component
                 row={row}
