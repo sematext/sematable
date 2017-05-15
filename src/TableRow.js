@@ -11,11 +11,11 @@ const propTypes = {
   CheckboxComponent: PropTypes.func,
 };
 
-const resolveProps = (row, componentProps) => {
+const resolveProps = (row, componentProps, tableProps) => {
   if (!componentProps) {
     return {};
   } else if (_.isFunction(componentProps)) {
-    return componentProps(row);
+    return componentProps(row, tableProps);
   } else if (_.isObject(componentProps)) {
     return componentProps;
   }
@@ -31,6 +31,7 @@ class TableRow extends Component {
       headers,
       columns,
       CheckboxComponent,
+      ...otherProps,
     } = this.props;
     const select = headers.select;
     const visibleColumns = columns.filter((c) => !c.hidden);
@@ -57,7 +58,7 @@ class TableRow extends Component {
               <col.Component
                 row={row}
                 key={col.key}
-                {...resolveProps(row, col.componentProps)}
+                {...resolveProps(row, col.componentProps, otherProps)}
               >
                 {_.get(row, col.key)}
               </col.Component> : _.get(row, col.key)
