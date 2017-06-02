@@ -44,6 +44,12 @@ const propTypes = {
   onSelectAllChange: PropTypes.func.isRequired,
 };
 
+const arrayEquals = (array1, array2) => 
+    array1 instanceof Array &&
+    array2 instanceof Array &&
+    array1.length === array2.length &&
+    array1.every((element, index) => element === array2[index]);
+
 /**
  * Wrapper for adding filter, sort and pagination for tabular data.
  *
@@ -109,11 +115,11 @@ const sematable = (tableName, TableComponent, columns, configs = {}) => {
         onNewFilterValue,
       } = this.props;
 
-      if (data !== nextProps.data) {
+      if (data !== nextProps.data && !arrayEquals(data, nextProps.data)) {
         onNewData(nextProps.data);
       }
 
-      if (filterValue !== nextProps.filterValue) {
+      if (filterValue !== nextProps.filterValue && !arrayEquals(filterValue, nextProps.filterValue)) {
         onNewFilterValue(nextProps.filterValue);
       }
     }
