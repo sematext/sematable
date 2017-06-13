@@ -31,7 +31,7 @@ class Filter extends Component {
       hasFilterable,
       placeholder,
     } = this.props;
-    const defaultPlaceholder = hasFilterable ? 'Search by text or tags' : 'Search by text';
+    const defaultPlaceholder = hasFilterable ? 'Search or filter using tags...' : 'Search...';
     return (
       <Creatable
         className={className}
