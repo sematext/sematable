@@ -71,6 +71,7 @@
     "bootstrap": "^3.0 || ^4.0"
   },
   "dependencies": {
+    "react-pager": "^1.2.1",
     "react-select": "^1.0.0-rc.1",
     "redux-actions": "^0.11.0",
     "reselect": "^2.5.3"
