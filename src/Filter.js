@@ -9,7 +9,7 @@ const propTypes = {
   options: PropTypes.array.isRequired,
   className: PropTypes.string,
   hasFilterable: PropTypes.bool,
-  placeholder: PropTypes.string,
+  placeholder: PropTypes.node,
 };
 
 class Filter extends Component {
