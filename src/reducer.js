@@ -20,7 +20,7 @@ import { PAGE_SIZE_ALL_VALUE } from './PageSize';
 const defaultState = (configs = {}) => ({
   page: 0,
   pageSize: configs.defaultPageSize || 5,
-  pageSizes: configs.defaultPageSizes || [5, 10, 50, 100, PAGE_SIZE_ALL_VALUE],
+  pageSizes: configs.defaultPageSizes || [5, 10, 15, 20, 50, 100, PAGE_SIZE_ALL_VALUE],
   filter: [],
   filterText: null,
   sortKey: configs.sortKey,
