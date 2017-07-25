@@ -12,7 +12,6 @@ const propTypes = {
 
 class Pagination extends Component {
   render() {
-    console.log('PAGIN PROPS: ', this.props);
     const {
       page,
       pageSize,
