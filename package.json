@@ -10,7 +10,7 @@
     "eslint": "./node_modules/.bin/eslint src",
     "lint": "npm run eslint",
     "storybook": "start-storybook -p 6006",
-    "postinstall" : "npm run compile",
+    "postinstall" : "babel --presets es2015 -d lib/ src/",
     "build-storybook": "build-storybook"
   },
   "repository": {
