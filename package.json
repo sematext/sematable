@@ -18,7 +18,8 @@
     "url": "git+https://github.com/sematext/sematable.git"
   },
   "files": [
-    "src/"
+    "src/",
+    "lib/"
   ],
   "keywords": [
     "redux",
