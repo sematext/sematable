@@ -6,7 +6,6 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "compile": "babel --presets es2015 -d lib/ src/",
-    "postinstall": "npm run compile",
     "prepublish": "npm run compile",
     "eslint": "./node_modules/.bin/eslint src",
     "lint": "npm run eslint",
