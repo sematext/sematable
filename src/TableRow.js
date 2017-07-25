@@ -31,7 +31,7 @@ class TableRow extends Component {
       headers,
       columns,
       CheckboxComponent,
-      ...otherProps,
+      ...otherProps
     } = this.props;
     const select = headers.select;
     const visibleColumns = columns.filter((c) => !c.hidden);
