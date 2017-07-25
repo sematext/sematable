@@ -16,6 +16,10 @@
     "type": "git",
     "url": "git+https://github.com/sematext/sematable.git"
   },
+  "files": [
+    "src/",
+    "lib/"
+  ],
   "keywords": [
     "redux",
     "react",

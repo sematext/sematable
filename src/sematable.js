@@ -148,6 +148,8 @@ const sematable = (tableName, TableComponent, columns, configs = {}) => {
         autoHidePagination = true,
         pageSizeContainerClassName = 'col-md-6',
         filterContainerClassName = 'col-md-6',
+        paginationContainerClassName = 'col-md-12',
+        paginationClassName,
         pageSizeClassName,
         filterClassName,
         filterPlaceholder,
@@ -217,9 +219,10 @@ const sematable = (tableName, TableComponent, columns, configs = {}) => {
               {...configs}
             />
           </div>
-          <div className="col-md-12">
+          <div className={paginationContainerClassName}>
             <Pagination
               {...pageInfo}
+              className={paginationClassName}
               autoHidePagination={autoHidePagination}
               onPageChange={(p) => onPageChange(p)}
             />

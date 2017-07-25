@@ -171,6 +171,8 @@ The `sematable(tableName, component, columns, configs)` wrapper accepts four par
  - _filterPlaceholder_ filter placeholder text
  - _pageSizeClassName_ css class for the page size component ('col-md-6' by default)
  - _pageSizeContainerClassName_ css class for the page size component container element ('col-md-6' by default)
+ - _paginationClassName_ css class for the pagination component (`null` by default)
+ - _paginationContainerClassName_ css class for the pagination component container element ('col-md-12' by default)
  - _sortKey_ default column to sort by (not sorted by default)
  - _sortDirection_ default sort direction, `asc` or `desc` (`asc` by default)
 
