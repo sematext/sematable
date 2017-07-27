@@ -173,6 +173,10 @@ The `sematable(tableName, component, columns, configs)` wrapper accepts four par
  - _pageSizeContainerClassName_ css class for the page size component container element ('col-md-6' by default)
  - _paginationClassName_ css class for the pagination component (`null` by default)
  - _paginationContainerClassName_ css class for the pagination component container element ('col-md-12' by default)
+ - _tableContainerClassName_ css class for the table component container element ('col-md-12' by default)
+ - _sortAscIconClass_ css class for the icon indicating the column is sorted ascending ('fa fa-long-arrow-up' by default)
+ - _sortDescIconClass_ css class for the icon indicating the column is sorted descending ('fa fa-long-arrow-down' by default)
+ - _sortIconClass_ css class for the icon indicating that a column is sortable, and not currently sorted ('fa fa-arrows-v' by default)
  - _sortKey_ default column to sort by (not sorted by default)
  - _sortDirection_ default sort direction, `asc` or `desc` (`asc` by default)
 
