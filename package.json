@@ -63,15 +63,15 @@
   },
   "peerDependencies": {
     "lodash": "^4.15.0",
-    "react": "^15.1.0",
-    "react-dom": "^15.3.2",
+    "react": "^15.5.0",
+    "react-dom": "^15.5.0",
     "react-redux": "^4.4.5",
     "redux": "^3.4.0",
     "font-awesome": "^4.7.0",
     "bootstrap": "^3.0 || ^4.0"
   },
   "dependencies": {
-    "react-select": "^1.0.0-rc.1",
+    "react-select": "^1.0.0-rc.5",
     "redux-actions": "^0.11.0",
     "reselect": "^2.5.3"
   },
@@ -91,8 +91,8 @@
     "eslint-plugin-jsx-a11y": "^2.1.0",
     "eslint-plugin-react": "^6.0.0",
     "lodash": "^4.15.0",
-    "react": "^15.1.0",
-    "react-dom": "^15.3.2",
+    "react": "15.5.0",
+    "react-dom": "15.5.0",
     "redux": "^3.4.0",
     "font-awesome": "^4.7.0",
     "react-redux": "^4.4.5"
