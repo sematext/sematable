@@ -136,10 +136,16 @@ const behaviours = {
       ],
     };
   },
-  [TABLE_DESTROY_STATE]: (state) => ({
-    ...state,
-    ...defaultState(state.configs),
-  }),
+  [TABLE_DESTROY_STATE]: (state) => {
+    if (!state) {
+      return state;
+    }
+
+    return {
+      ...state,
+      ...defaultState(state.configs),
+    };
+  },
 };
 
 const tableReducer = handleActions(behaviours);
