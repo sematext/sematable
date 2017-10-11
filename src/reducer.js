@@ -47,7 +47,10 @@ const behaviours = {
     };
     const primaryKeyCol = _.find(nextState.columns, 'primaryKey');
     const columnMap = _.keyBy(nextState.columns, 'key');
-    const filter = filterValueToFilter(payload.filterValue, columnMap);
+    const filter = payload.filterValue ?
+      filterValueToFilter(payload.filterValue, columnMap) :
+      nextState.filter;
+
     if (!primaryKeyCol) {
       const msg = 'One column must be marked as primary with "primaryKey" for' +
                   ` data table ${nextState.tableName}.`;
