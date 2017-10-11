@@ -7,6 +7,9 @@ const propTypes = {
   handleClick: PropTypes.func.isRequired,
   sorted: PropTypes.string,
   title: PropTypes.string,
+  sortAscIconClass: PropTypes.string,
+  sortDescIconClass: PropTypes.string,
+  sortIconClass: PropTypes.string,
 };
 
 class SortableHeader extends Component {
@@ -17,6 +20,9 @@ class SortableHeader extends Component {
       sorted,
       title,
       handleClick,
+      sortAscIconClass,
+      sortDescIconClass,
+      sortIconClass,
     } = this.props;
     return (
       <th
@@ -31,10 +37,10 @@ class SortableHeader extends Component {
         <span style={{ marginRight: '5px' }}>
           {name}
         </span>
-        {sorted === 'asc' && <i className="fa fa-long-arrow-up" />}
-        {sorted === 'desc' && <i className="fa fa-long-arrow-down" />}
+        {sorted === 'asc' && <i className={sortAscIconClass} />}
+        {sorted === 'desc' && <i className={sortDescIconClass} />}
         {sorted === null && <i
-          className="fa fa-arrows-v"
+          className={sortIconClass}
           style={{ color: '#ccc' }}
         />}
       </th>

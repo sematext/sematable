@@ -7,6 +7,7 @@ const propTypes = {
   pageCount: PropTypes.number.isRequired,
   pageSize: PropTypes.number.isRequired,
   onPageChange: PropTypes.func.isRequired,
+  className: PropTypes.string,
   autoHidePagination: PropTypes.bool,
 };
 
@@ -15,6 +16,7 @@ class Pagination extends Component {
     const {
       page,
       pageSize,
+      className,
       onPageChange,
       autoHidePagination,
     } = this.props;
@@ -28,7 +30,7 @@ class Pagination extends Component {
     }
     if (pageCount > 1 || !autoHidePagination) {
       return (
-        <nav>
+        <nav className={className}>
           <ul className="pagination pagination-sm">
             <li className={`page-item ${hasPrevious ? '' : 'disabled'}`}>
               <a
