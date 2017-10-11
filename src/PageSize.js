@@ -5,7 +5,6 @@ import _ from 'lodash';
 const propTypes = {
   pageSize: PropTypes.number.isRequired,
   pageSizes: PropTypes.array.isRequired,
-  totalSize: PropTypes.number.isRequired,
   onChange: PropTypes.func.isRequired,
   className: PropTypes.string,
 };
@@ -17,24 +16,22 @@ class PageSize extends Component {
     const {
       pageSize,
       pageSizes,
-      totalSize,
       onChange,
       className,
     } = this.props;
     return (
-      <div
-        className={className}
-        style={{
-          margin: '1rem 0 1rem 0',
-        }}
-      >
+      <div className={className}>
+        <span className="sema-label">
+          Show
+        </span>
         <select
           onChange={(e) => onChange(parseInt(e.target.value, 10))}
           value={pageSize}
           className="form-control sema-field"
           style={{
             display: 'inline-block',
-            width: '80px',
+            width: '60px',
+            height: '25px',
             margin: '0 0 0 5px',
           }}
         >
@@ -49,12 +46,6 @@ class PageSize extends Component {
             ))
           }
         </select>
-        <span
-          className="sema-label"
-          style={{ whiteSpace: 'nowrap' }}
-        >
-          {`${pageSize !== -1 ? ' of' : ''} ${totalSize}`}
-        </span>
       </div>
     );
   }
