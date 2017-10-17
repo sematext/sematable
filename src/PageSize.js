@@ -8,6 +8,9 @@ const propTypes = {
   totalSize: PropTypes.number.isRequired,
   onChange: PropTypes.func.isRequired,
   className: PropTypes.string,
+  style: PropTypes.object,
+  selectStyle: PropTypes.object,
+  children: PropTypes.node,
 };
 
 export const PAGE_SIZE_ALL_VALUE = -1;
@@ -20,23 +23,21 @@ class PageSize extends Component {
       totalSize,
       onChange,
       className,
+      style,
+      selectStyle,
+      children,
     } = this.props;
     return (
       <div
         className={className}
-        style={{
-          margin: '1rem 0 1rem 0',
-        }}
+        style={style}
       >
+        {children}
         <select
           onChange={(e) => onChange(parseInt(e.target.value, 10))}
           value={pageSize}
           className="form-control sema-field"
-          style={{
-            display: 'inline-block',
-            width: '80px',
-            margin: '0 0 0 5px',
-          }}
+          style={selectStyle}
         >
           {
             _.map(pageSizes, (size, i) => (

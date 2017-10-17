@@ -194,6 +194,14 @@ const sematable = (tableName, TableComponent, columns, configs = {}) => {
               pageSizes={pageInfo.pageSizes}
               totalSize={data.length}
               onChange={(f) => onPageSizeChange(f)}
+              style={{
+                margin: '1rem 0 1rem 0',
+              }}
+              selectStyle={{
+                display: 'inline-block',
+                width: '80px',
+                margin: '0 0 0 5px',
+              }}
             />}
           </div>
           <div className={filterContainerClassName}>
@@ -205,6 +213,7 @@ const sematable = (tableName, TableComponent, columns, configs = {}) => {
               onTextChange={(f) => onFilterTextChange(f)}
               hasFilterable={hasFilterable}
               placeholder={filterPlaceholder}
+              style={{ margin: '1rem 0 1rem 0' }}
             />}
           </div>
           <div className="col-md-12">

@@ -82,10 +82,16 @@ function sort(rows, { sortKey, direction }) {
   });
 }
 
+const selectors = {};
+
 // wrapped in function as we use the same selectors for multiple tables
 // if we don't wrap selectors like this, they would never memoize/cache results
 // as we use it for multiple tables (each table has different state)
 export default (tableName) => {
+  if (selectors[tableName]) {
+    return selectors[tableName];
+  }
+
   const tableProp = (state, prop) => state.sematable[tableName] ?
     _.get(state.sematable[tableName], prop) : undefined;
 
@@ -231,7 +237,7 @@ export default (tableName) => {
     }
   );
 
-  return {
+  selectors[tableName] = {
     getInitialData,
     getIsInitialized,
     getFilter,
@@ -243,5 +249,8 @@ export default (tableName) => {
     getSelectAll,
     getPrimaryKey,
     getFilterOptions,
+    getFiltered,
   };
+
+  return selectors[tableName];
 };

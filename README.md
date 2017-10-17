@@ -160,6 +160,25 @@ The `sematable(tableName, component, columns, configs)` wrapper accepts four par
  - _columns_ is an array of column definitions
  - _configs_ is an optional object where you can specify configuration properties
 
+### Showing page size and filter somewhere else
+
+If you want to show the page size and filter somewhere else in your
+application, you can use the provided PageSizeContainer, and FilterContainer
+component. Like this:
+
+```javascript
+import { PageSizeContainer, FilterContainer } from 'sematable';
+
+export default props => (
+    <div>
+      <FilterContainer tableName="myTable" columns={myTableColumns} />
+      <PageSizeContainer tableName="myTable" />
+    </div>
+);
+```
+
+You can style these components with `style` or `className`.
+
 ### Configuration properties:
 
  - _showPageSize_ if page size select should be shown

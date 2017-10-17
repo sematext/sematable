@@ -11,6 +11,7 @@ const propTypes = {
   className: PropTypes.string,
   hasFilterable: PropTypes.bool,
   placeholder: PropTypes.node,
+  style: PropTypes.object,
 };
 
 class Filter extends Component {
@@ -31,6 +32,7 @@ class Filter extends Component {
       className,
       hasFilterable,
       placeholder,
+      style,
     } = this.props;
     const defaultPlaceholder = hasFilterable ? 'Search or filter using tags...' : 'Search...';
     return (
@@ -50,9 +52,7 @@ class Filter extends Component {
         newOptionCreator={({ label }) => createTextFilter(label)}
         value={value}
         multi
-        style={{
-          margin: '1rem 0 1rem 0',
-        }}
+        style={style}
       />
     );
   }
