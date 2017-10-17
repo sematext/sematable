@@ -29,7 +29,7 @@ class Pagination extends Component {
     if (pageCount > 1 || !autoHidePagination) {
       return (
         <nav>
-          <ul className="pagination pagination-sm">
+          <ul className="pagination">
             <li className={`page-item ${hasPrevious ? '' : 'disabled'}`}>
               <a
                 href="#previous"
