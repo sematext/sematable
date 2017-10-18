@@ -22,6 +22,7 @@ const mapStateToProps = (state, { tableName }) => {
     isInitialized,
     value: selectors.getFilter(state),
     options: selectors.getFilterOptions(state),
+    columns: selectors.getColumns(state),
   };
 };
 

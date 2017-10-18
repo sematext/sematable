@@ -171,7 +171,7 @@ import { PageSizeContainer, FilterContainer } from 'sematable';
 
 export default props => (
     <div>
-      <FilterContainer tableName="myTable" columns={myTableColumns} />
+      <FilterContainer tableName="myTable" />
       <PageSizeContainer tableName="myTable" />
     </div>
 );
