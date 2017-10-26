@@ -181,6 +181,7 @@ You can style these components with `style` or `className`.
 
 ### Configuration properties:
 
+ - _plain_ if you want only the table component to be returned without page size, pagination, or filter (will not use bootstrap grid)
  - _showPageSize_ if page size select should be shown
  - _showFilter_ if text filter field should be shown
  - _defaultPageSize_ overrides the default page size (if not specified 5 will be used)

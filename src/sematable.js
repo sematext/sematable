@@ -185,6 +185,20 @@ const sematable = (tableName, TableComponent, columns, configs = {}) => {
         select,
       };
 
+      if (configs.plain) {
+        return (
+          <TableComponent
+            {...otherProps}
+            data={visibleRows}
+            headers={headers}
+            primaryKey={primaryKey}
+            columns={columns}
+            filter={filter}
+            {...configs}
+          />
+        );
+      }
+
       return (
         <div className="row">
           <div className={pageSizeContainerClassName}>
