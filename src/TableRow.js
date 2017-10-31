@@ -44,7 +44,7 @@ class TableRow extends Component {
     return (
       <tr className={className}>
         {selectable &&
-          <td key="select">
+          <td key="select" style={{ width: '1%', whiteSpace: 'nowrap' }}>
             <SelectRow
               row={row}
               isEnabled={selectEnabled}
