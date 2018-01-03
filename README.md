@@ -280,6 +280,7 @@ We provide a few selectors that can be useful when working with sematable:
 getSelectedRows
 getInitialData
 getIsInitialized
+getFiltered
 getFilter
 getColumns
 getSortInfo
