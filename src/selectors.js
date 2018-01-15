@@ -31,15 +31,16 @@ function filter(rows = [], filters = [], filterText, columns) {
 
   const valueFilters = filters.filter(f => f.valueFilter);
 
+
   // apply text filters across all columns
   if (textFilters.length > 0) {
-    filteredRows = _.filter(rows, row => _.some(columns, (column) => {
-      if (!column.searchable) {
-        return false;
-      }
-      const normalized = String(_.get(row, column.key)).toLowerCase();
-      return _.every(textFilters, f => normalized.indexOf(f) > -1);
-    }));
+    filteredRows = _.filter(rows, (row) => {
+      let string = _.reduce(columns.filter(column => column.searchable), (result, column) =>
+        result += ` ${_.get(row, column.key)}`, '');
+
+      string = string.toLowerCase();
+      return _.every(textFilters, f => string.indexOf(f) > -1);
+    });
   }
 
   // apply value filters on filterable columns
