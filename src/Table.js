@@ -20,6 +20,29 @@ const propTypes = {
   NoDataComponent: PropTypes.func,
 };
 
+const resolveHeaderCondition = (col, tableProps) => {
+  if (!col) {
+    return false;
+  } else if (_.isFunction(col.headerComponentVisible)) {
+    return col.headerComponentVisible(tableProps);
+  } else if (_.isBoolean(col.headerComponentVisible)) {
+    return col.headerComponentVisible;
+  }
+  throw new Error('Header\'s headerComponentVisible should be a function or a boolean!');
+};
+
+const omitHeaderProps = props => _.omit(props, [
+  'data',
+  'filter',
+  'primaryKey',
+  'selectable',
+  'selectEnabled',
+  'className',
+  'styleName',
+  'CheckboxComponent',
+  'NoDataComponent',
+]);
+
 class Table extends Component {
   render() {
     const {
@@ -50,6 +73,16 @@ class Table extends Component {
               />
             }
             {visibleColumns.map((col) => {
+              const { hidden, HeaderComponent, key, title } = col;
+              if (!hidden && HeaderComponent && resolveHeaderCondition(col, this.props)) {
+                return (<th>
+                  <col.HeaderComponent
+                    {...omitHeaderProps(this.props)}
+                    key={key}
+                    title={title}
+                  />
+                </th>);
+              }
               if (col.sortable && !col.hidden) {
                 return (
                   <SortableHeader

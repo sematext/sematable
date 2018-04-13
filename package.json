@@ -1,6 +1,6 @@
 {
   "name": "sematable",
-  "version": "1.9.1",
+  "version": "1.9.2",
   "description": "Client side sorting, pagination, and text filter for redux/react based apps",
   "main": "lib/index.js",
   "scripts": {
@@ -62,15 +62,16 @@
     }
   },
   "peerDependencies": {
+    "bootstrap": "^3.0 || ^4.0",
+    "font-awesome": "^4.7.0",
     "lodash": "^4.15.0",
     "react": "^15.5.0",
     "react-dom": "^15.5.0",
     "react-redux": "^4.4.5",
-    "redux": "^3.4.0",
-    "font-awesome": "^4.7.0",
-    "bootstrap": "^3.0 || ^4.0"
+    "redux": "^3.4.0"
   },
   "dependencies": {
+    "prop-types": "^15.6.1",
     "react-select": "^1.0.0-rc.5",
     "redux-actions": "^0.11.0",
     "reselect": "^2.5.3"
@@ -90,11 +91,11 @@
     "eslint-plugin-import": "^1.13.0",
     "eslint-plugin-jsx-a11y": "^2.1.0",
     "eslint-plugin-react": "^6.0.0",
+    "font-awesome": "^4.7.0",
     "lodash": "^4.15.0",
     "react": "15.5.0",
     "react-dom": "15.5.0",
-    "redux": "^3.4.0",
-    "font-awesome": "^4.7.0",
-    "react-redux": "^4.4.5"
+    "react-redux": "^4.4.5",
+    "redux": "^3.4.0"
   }
 }
