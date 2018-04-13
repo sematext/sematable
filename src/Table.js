@@ -21,7 +21,7 @@ const propTypes = {
 };
 
 const resolveHeaderCondition = (col, tableProps) => {
-  if (!col) {
+  if (!col || !col.headerComponentVisible) {
     return false;
   } else if (_.isFunction(col.headerComponentVisible)) {
     return col.headerComponentVisible(tableProps);
