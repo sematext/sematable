@@ -151,7 +151,7 @@ const behaviours = {
   },
 };
 
-const tableReducer = handleActions(behaviours);
+const tableReducer = handleActions(behaviours, defaultState());
 
 export default (state, action) => {
   if (!state) {
