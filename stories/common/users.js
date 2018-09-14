@@ -43,4 +43,9 @@ const users = [
   },
 ];
 
+let i = 100;
+while (i > 6) {
+  users.push({ id: i--, firstName: 'test', lastName: 'test', status: 'ACTIVE', confirmed: true });
+}
+
 export default users;
