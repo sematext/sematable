@@ -14,7 +14,8 @@ navigations.
 
 ![image](https://cloud.githubusercontent.com/assets/497926/24330201/a156edec-1219-11e7-877b-e0c4c49fd947.png)
 
-[More About Sematable](https://sematext.com/blog/2016/12/07/reactjs-redux-table-sematable/)
+- [More About Sematable](https://sematext.com/blog/2016/12/07/reactjs-redux-table-sematable/)
+- [Live Sematable examples](https://apps.sematext.com/demo)
 
 ![](https://nodei.co/npm/sematable.png?downloads=true&downloadRank=true&stars=true)
 
