@@ -8,7 +8,7 @@ import TableNoData from './TableNoData';
 
 const propTypes = {
   data: PropTypes.array.isRequired,
-  headers: PropTypes.object.isRequired,
+  headers: PropTypes.object,
   columns: PropTypes.array.isRequired,
   filter: PropTypes.array.isRequired,
   primaryKey: PropTypes.string.isRequired,
@@ -64,46 +64,48 @@ class Table extends Component {
 
     return (
       <table className={`table ${className}`}>
-        <thead>
-          <tr>
-            {selectable &&
-              <SelectAllHeader
-                {...headers.select}
-                CheckboxComponent={CheckboxComponent}
-              />
-            }
-            {visibleColumns.map((col) => {
-              const { hidden, HeaderComponent, key, title } = col;
-              if (!hidden && HeaderComponent && resolveHeaderCondition(col, this.props)) {
-                return (<th>
-                  <col.HeaderComponent
-                    {...omitHeaderProps(this.props)}
-                    key={key}
-                    title={title}
-                  />
-                </th>);
+        {headers && (
+          <thead>
+            <tr>
+              {selectable &&
+                <SelectAllHeader
+                  {...headers.select}
+                  CheckboxComponent={CheckboxComponent}
+                />
               }
-              if (col.sortable && !col.hidden) {
+              {visibleColumns.map((col) => {
+                const { hidden, HeaderComponent, key, title } = col;
+                if (!hidden && HeaderComponent && resolveHeaderCondition(col, this.props)) {
+                  return (<th>
+                    <col.HeaderComponent
+                      {...omitHeaderProps(this.props)}
+                      key={key}
+                      title={title}
+                    />
+                  </th>);
+                }
+                if (col.sortable && !col.hidden) {
+                  return (
+                    <SortableHeader
+                      key={col.key}
+                      title={col.title}
+                      {...headers[col.key]}
+                    />);
+                }
                 return (
-                  <SortableHeader
+                  <th
+                    data-key={col.key}
                     key={col.key}
                     title={col.title}
-                    {...headers[col.key]}
-                  />);
-              }
-              return (
-                <th
-                  data-key={col.key}
-                  key={col.key}
-                  title={col.title}
-                  data-toggle={col.title ? 'tooltip' : ''}
-                >
-                  {col.header}
-                </th>
-              );
-            })}
-          </tr>
-        </thead>
+                    data-toggle={col.title ? 'tooltip' : ''}
+                  >
+                    {col.header}
+                  </th>
+                );
+              })}
+            </tr>
+          </thead>
+        )}
         <tbody>
           {data.map((row) => (
             <TableRow key={_.get(row, primaryKey)} {...this.props} row={row} />

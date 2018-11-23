@@ -7,7 +7,7 @@ const propTypes = {
   selectable: PropTypes.bool,
   selectEnabled: PropTypes.func,
   row: PropTypes.object.isRequired,
-  headers: PropTypes.object.isRequired,
+  headers: PropTypes.object,
   columns: PropTypes.array.isRequired,
   CheckboxComponent: PropTypes.func,
 };
@@ -34,9 +34,13 @@ class TableRow extends Component {
       CheckboxComponent,
       ...otherProps
     } = this.props;
-    const select = headers.select;
+    const select = headers && headers.select;
     const visibleColumns = columns.filter((c) => !c.hidden);
     let className = '';
+
+    if (selectable && !select) {
+      throw new Error('`headers` must be provided with `headers.select` when `selectable` is true');
+    }
 
     if (selectable && select.isSelected(row)) {
       className = 'table-info';
