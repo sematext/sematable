@@ -1,6 +1,7 @@
 import { storiesOf } from '@kadira/storybook';
 import StoryDefault from './default/StoryDefault';
 import StorySelectable from './default/StorySelectable';
+import StoryOverrideConfigs from './default/StoryOverrideConfigs';
 import StoryEditable from './editable/StoryEditable';
 import StoryButton from './button/StoryButton';
 
@@ -15,4 +16,5 @@ storiesOf('Sematable', module)
   .add('Default', StoryDefault)
   .add('Selectable', StorySelectable)
   .add('Editable', StoryEditable)
+  .add('Override configs', StoryOverrideConfigs)
   .add('Button', StoryButton);

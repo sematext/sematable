@@ -95,6 +95,15 @@ export default (tableName) => {
   const tableProp = (state, prop) => state.sematable[tableName] ?
     _.get(state.sematable[tableName], prop) : undefined;
 
+  const tableOrComponentProp = (state, props, prop) => {
+    if (props[prop] !== undefined) {
+      return props[prop];
+    }
+
+    return state.sematable[tableName] ?
+      _.get(state.sematable[tableName], prop) : undefined;
+  };
+
   const getIsInitialized = (state) => state.sematable[tableName] !== undefined;
   const getInitialData = (state) => tableProp(state, 'initialData');
   const getFilter = (state) => tableProp(state, 'filter');
@@ -102,8 +111,8 @@ export default (tableName) => {
   const getColumns = (state) => tableProp(state, 'columns');
   const getPage = (state) => tableProp(state, 'page');
   const getPrimaryKey = (state) => tableProp(state, 'primaryKey');
-  const getPageSize = (state) => tableProp(state, 'pageSize');
-  const getPageSizes = (state) => tableProp(state, 'pageSizes');
+  const getPageSize = (state, props) => tableOrComponentProp(state, props, 'pageSize');
+  const getPageSizes = (state, props) => tableProp(state, 'pageSizes');
   const getUserSelection = (state) => tableProp(state, 'userSelection');
   const getSelectAll = (state) => tableProp(state, 'selectAll');
   const getSortInfo = (state) => ({

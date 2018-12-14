@@ -62,7 +62,7 @@ const propTypes = {
 const sematable = (tableName, TableComponent, columns, configs = {}) => {
   const selectors = makeSelectors(tableName);
 
-  const mapStateToProps = (state) => {
+  const mapStateToProps = (state, props) => {
     const isInitialized = selectors.getIsInitialized(state);
     if (!isInitialized) {
       return {
@@ -71,14 +71,14 @@ const sematable = (tableName, TableComponent, columns, configs = {}) => {
     }
     return {
       isInitialized,
-      visibleRows: selectors.getVisible(state),
-      filter: selectors.getFilter(state),
-      sortInfo: selectors.getSortInfo(state),
-      pageInfo: selectors.getPageInfo(state),
-      selectAll: selectors.getSelectAll(state),
-      selectedRows: selectors.getSelectedRows(state),
-      primaryKey: selectors.getPrimaryKey(state),
-      filterOptions: selectors.getFilterOptions(state),
+      visibleRows: selectors.getVisible(state, props),
+      filter: selectors.getFilter(state, props),
+      sortInfo: selectors.getSortInfo(state, props),
+      pageInfo: selectors.getPageInfo(state, props),
+      selectAll: selectors.getSelectAll(state, props),
+      selectedRows: selectors.getSelectedRows(state, props),
+      primaryKey: selectors.getPrimaryKey(state, props),
+      filterOptions: selectors.getFilterOptions(state, props),
     };
   };
 
