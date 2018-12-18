@@ -24,7 +24,13 @@ const pageItem = (idx, page, onPageChange) => (
     </a>
   </li>
 );
-
+const ellipsisItem = (idx) => (
+  <li key={`ellipsis-${idx}`} className="page-item">
+    <div className="page-link">
+      ...
+    </div>
+  </li>
+);
 // shown pages: first, pagesBeforeCurrent, current, pagesAfterCurrent, last
 const pagesBeforeCurrent = 5;
 const pagesAfterCurrent = 5;
@@ -36,6 +42,14 @@ const currentPageRange = (page, pageCount) => {
   firstPage = Math.max(firstPage, firstPageMinValue);
   firstPage = Math.min(firstPage, firstPageMaxValue);
   return _.range(firstPage, firstPage + rangeCount);
+};
+const middlePages = (page, pageCount, onPageChange) => {
+  const pageRange = currentPageRange(page, pageCount);
+  const ret = [];
+  if (pageRange[0] > 1) ret.push(ellipsisItem(0));
+  ret.push(pageRange.map(idx => pageItem(idx, page, onPageChange)));
+  if (pageRange[pageRange.length - 1] < pageCount - 2) ret.push(ellipsisItem(1));
+  return ret;
 };
 
 class Pagination extends Component {
@@ -75,9 +89,7 @@ class Pagination extends Component {
               </a>
             </li>
             { pageItem(0, page, onPageChange) }
-            { pageCount > 2 &&
-                currentPageRange(page, pageCount).map(idx => pageItem(idx, page, onPageChange))
-            }
+            { pageCount > 2 && middlePages(page, pageCount, onPageChange) }
             { pageCount > 1 && pageItem(pageCount - 1, page, onPageChange) }
             <li className={`page-item ${hasNext ? '' : 'disabled'}`}>
               <a
