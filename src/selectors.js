@@ -96,7 +96,7 @@ export default (tableName) => {
     _.get(state.sematable[tableName], prop) : undefined;
 
   const tableOrComponentProp = (state, props, prop) => {
-    if (props[prop] !== undefined) {
+    if (props && props[prop] !== undefined) {
       return props[prop];
     }
 
@@ -112,7 +112,7 @@ export default (tableName) => {
   const getPage = (state) => tableProp(state, 'page');
   const getPrimaryKey = (state) => tableProp(state, 'primaryKey');
   const getPageSize = (state, props) => tableOrComponentProp(state, props, 'pageSize');
-  const getPageSizes = (state, props) => tableProp(state, 'pageSizes');
+  const getPageSizes = (state) => tableProp(state, 'pageSizes');
   const getUserSelection = (state) => tableProp(state, 'userSelection');
   const getSelectAll = (state) => tableProp(state, 'selectAll');
   const getSortInfo = (state) => ({

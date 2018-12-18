@@ -4,7 +4,8 @@ import makeSelectors from './selectors';
 import { tablePageSizeChanged } from './actions';
 import PageSize from './PageSize';
 
-const mapStateToProps = (state, { tableName }) => {
+const mapStateToProps = (state, props) => {
+  const { tableName } = props;
   const selectors = makeSelectors(tableName);
   const isInitialized = selectors.getIsInitialized(state);
 
@@ -14,7 +15,7 @@ const mapStateToProps = (state, { tableName }) => {
     };
   }
 
-  const pageInfo = selectors.getPageInfo(state);
+  const pageInfo = selectors.getPageInfo(state, props);
 
   return {
     isInitialized,
