@@ -10,6 +10,7 @@ const propTypes = {
   headers: PropTypes.object,
   columns: PropTypes.array.isRequired,
   CheckboxComponent: PropTypes.func,
+  rowClassResolver: PropTypes.func,
 };
 
 const resolveProps = (row, componentProps, tableProps) => {
@@ -23,6 +24,13 @@ const resolveProps = (row, componentProps, tableProps) => {
   throw new Error('componentProps should be object or function!');
 };
 
+const resolveRowClasses = ({ rowClassResolver, ...props }, classes) => {
+  if (_.isFunction(rowClassResolver)) {
+    return `${classes !== '' ? `${classes} ` : ''}${rowClassResolver(props)}`;
+  }
+  throw new Error('If provided, rowClassResolver must be a function!');
+};
+
 class TableRow extends Component {
   render() {
     const {
@@ -32,6 +40,7 @@ class TableRow extends Component {
       headers,
       columns,
       CheckboxComponent,
+      rowClassResolver,
       ...otherProps
     } = this.props;
     const select = headers && headers.select;
@@ -45,6 +54,11 @@ class TableRow extends Component {
     if (selectable && select.isSelected(row)) {
       className = 'table-info';
     }
+
+    if (rowClassResolver) {
+      className = resolveRowClasses(this.props, className);
+    }
+
     return (
       <tr className={className}>
         {selectable &&
