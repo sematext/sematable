@@ -101,7 +101,9 @@ const behaviours = {
   [TABLE_FILTER_CHANGED]: (state, { payload }) => ({
     ...state,
     page: 0,
-    filter: payload.filter,
+    filter: _.get(payload, 'filter.textFilter') ? // if user-created
+      [...state.filter, payload.filter] :
+      payload.filter,
     filterText: null,
   }),
   [TABLE_FILTER_TEXT_CHANGED]: (state, { payload }) => ({

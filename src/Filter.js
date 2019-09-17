@@ -15,6 +15,12 @@ const propTypes = {
 };
 
 class Filter extends Component {
+  constructor(props) {
+    super(props);
+    this.handleInputChange = this.handleInputChange.bind(this);
+    this.handleCreateOption = this.handleCreateOption.bind(this);
+  }
+
   shouldComponentUpdate(nextProps) {
     const { value, options } = this.props;
     if (nextProps.value !== value || nextProps.options !== options) {
@@ -23,11 +29,25 @@ class Filter extends Component {
     return false;
   }
 
+  handleInputChange(text, { action }) {
+    const { onTextChange } = this.props;
+    // prevent blur from clearing text that wasn't confirmed with enter
+    if (action !== 'input-blur' && action !== 'menu-close') {
+      onTextChange(text);
+    }
+    return text;
+  }
+
+  handleCreateOption(val) {
+    const { onChange } = this.props;
+    const opt = createTextFilter(val);
+    onChange(opt);
+  }
+
   render() {
     const {
       value,
       onChange,
-      onTextChange,
       options,
       className,
       hasFilterable,
@@ -39,19 +59,14 @@ class Filter extends Component {
       <Creatable
         className={className}
         options={options}
-        noResultsText="Type text to search, press Enter to save as filter"
+        noOptionsMessage="Type text to search, press Enter to save as filter"
         placeholder={placeholder || defaultPlaceholder}
-        promptTextCreator={(txt) => `Search for '${txt}'`}
+        formatCreateLabel={(txt) => `Search for '${txt}'`}
         onChange={(selected) => onChange(selected)}
-        onInputChange={(text) => {
-          onTextChange(text);
-          return text;
-        }}
-        onBlurResetsInput={false}
-        onCloseResetsInput={false}
-        newOptionCreator={({ label }) => createTextFilter(label)}
+        onInputChange={this.handleInputChange}
+        onCreateOption={this.handleCreateOption}
         value={value}
-        multi
+        isMulti
         style={style}
       />
     );
