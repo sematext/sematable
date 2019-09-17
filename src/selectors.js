@@ -24,12 +24,14 @@ function filter(rows = [], filters = [], filterText, columns) {
     return filteredRows;
   }
 
+  const filtersArr = _.isArray(filters) ? filters : [filters];
+
   const textFilters = [
     ...(filterText ? [filterText.toLowerCase()] : []),
-    ...filters.filter(f => f.textFilter).map(f => f.value),
+    ...filtersArr.filter(f => f.textFilter).map(f => f.value),
   ];
 
-  const valueFilters = filters.filter(f => f.valueFilter);
+  const valueFilters = filtersArr.filter(f => f.valueFilter);
 
   // apply text filters across all columns
   if (textFilters.length > 0) {
