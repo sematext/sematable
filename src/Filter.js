@@ -19,6 +19,7 @@ class Filter extends Component {
     super(props);
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleCreateOption = this.handleCreateOption.bind(this);
+    this.handleBlur = this.handleBlur.bind(this);
   }
 
   shouldComponentUpdate(nextProps) {
@@ -35,7 +36,14 @@ class Filter extends Component {
     if (action !== 'input-blur' && action !== 'menu-close') {
       onTextChange(text);
     }
-    return text;
+  }
+
+  handleBlur(e) {
+    // create new option on blur
+    const val = e.target.value;
+    if (val !== '') {
+      this.handleCreateOption(val);
+    }
   }
 
   handleCreateOption(val) {
@@ -65,6 +73,7 @@ class Filter extends Component {
         onChange={(selected) => onChange(selected)}
         onInputChange={this.handleInputChange}
         onCreateOption={this.handleCreateOption}
+        onBlur={this.handleBlur}
         value={value}
         isMulti
         style={style}
