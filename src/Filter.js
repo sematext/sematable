@@ -5,6 +5,7 @@ import { createTextFilter } from './common';
 
 const propTypes = {
   value: PropTypes.array,
+  filterText: PropTypes.string,
   onChange: PropTypes.func.isRequired,
   onTextChange: PropTypes.func.isRequired,
   options: PropTypes.array.isRequired,
@@ -23,8 +24,10 @@ class Filter extends Component {
   }
 
   shouldComponentUpdate(nextProps) {
-    const { value, options } = this.props;
-    if (nextProps.value !== value || nextProps.options !== options) {
+    const { value, filterText, options } = this.props;
+    if (nextProps.value !== value ||
+        nextProps.options !== options ||
+        nextProps.filterText !== filterText) {
       return true;
     }
     return false;
@@ -32,17 +35,18 @@ class Filter extends Component {
 
   handleInputChange(text, { action }) {
     const { onTextChange } = this.props;
-    // prevent blur from clearing text that wasn't confirmed with enter
+    // prevent blur from clearing text that wasn't confirmed with tab or enter
     if (action !== 'input-blur' && action !== 'menu-close') {
       onTextChange(text);
     }
   }
 
   handleBlur(e) {
-    // create new option on blur
+    // preserve text on blur
+    const { onTextChange } = this.props;
     const val = e.target.value;
     if (val !== '') {
-      this.handleCreateOption(val);
+      onTextChange(val);
     }
   }
 
@@ -55,6 +59,7 @@ class Filter extends Component {
   render() {
     const {
       value,
+      filterText,
       onChange,
       options,
       className,
@@ -75,6 +80,7 @@ class Filter extends Component {
         onCreateOption={this.handleCreateOption}
         onBlur={this.handleBlur}
         value={value}
+        inputValue={filterText || ''}
         isMulti
         style={style}
       />

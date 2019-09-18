@@ -21,6 +21,7 @@ const mapStateToProps = (state, { tableName }) => {
   return {
     isInitialized,
     value: selectors.getFilter(state),
+    filterText: selectors.getFilterText(state),
     options: selectors.getFilterOptions(state),
     columns: selectors.getColumns(state),
   };

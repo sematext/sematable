@@ -252,6 +252,7 @@ export default (tableName) => {
     getInitialData,
     getIsInitialized,
     getFilter,
+    getFilterText,
     getColumns,
     getSortInfo,
     getPageInfo,
