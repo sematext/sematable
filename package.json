@@ -72,7 +72,7 @@
   },
   "dependencies": {
     "prop-types": "^15.6.1",
-    "react-select": "^1.0.0-rc.5",
+    "react-select": "^2",
     "redux-actions": "^0.11.0",
     "reselect": "^2.5.3"
   },
