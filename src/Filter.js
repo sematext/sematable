@@ -72,10 +72,10 @@ class Filter extends Component {
       <Creatable
         className={className}
         options={options}
-        noOptionsMessage="Type text to search, press Enter to save as filter"
+        noOptionsMessage={() => 'Type text to search, press Enter to save as filter'}
         placeholder={placeholder || defaultPlaceholder}
-        formatCreateLabel={(txt) => `Search for '${txt}'`}
-        onChange={(selected) => onChange(selected)}
+        formatCreateLabel={txt => `Search for '${txt}'`}
+        onChange={selected => onChange(selected)}
         onInputChange={this.handleInputChange}
         onCreateOption={this.handleCreateOption}
         onBlur={this.handleBlur}
