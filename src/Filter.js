@@ -51,9 +51,9 @@ class Filter extends Component {
   }
 
   handleCreateOption(val) {
-    const { onChange } = this.props;
+    const { onChange, value } = this.props;
     const opt = createTextFilter(val);
-    onChange(opt);
+    onChange([...value, opt], 'create-option');
   }
 
   render() {
@@ -74,8 +74,10 @@ class Filter extends Component {
         options={options}
         noOptionsMessage={() => 'Type text to search, press Enter to save as filter'}
         placeholder={placeholder || defaultPlaceholder}
-        formatCreateLabel={txt => `Search for '${txt}'`}
-        onChange={selected => onChange(selected)}
+        formatCreateLabel={txt => `Create '${txt}' filter`}
+        createOptionPosition="first"
+        isValidNewOption={input => !!input}
+        onChange={(selected, meta) => onChange(selected, meta.action)}
         onInputChange={this.handleInputChange}
         onCreateOption={this.handleCreateOption}
         onBlur={this.handleBlur}

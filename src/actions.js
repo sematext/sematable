@@ -45,11 +45,12 @@ export const tablePageSizeChanged = (tableName, pageSize) => ({
   },
 });
 
-export const tableFilterChanged = (tableName, filter) => ({
+export const tableFilterChanged = (tableName, filter, action) => ({
   type: TABLE_FILTER_CHANGED,
   payload: {
     tableName,
     filter,
+    action,
   },
 });
 

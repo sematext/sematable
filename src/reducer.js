@@ -102,7 +102,9 @@ const behaviours = {
     ...state,
     page: 0,
     filter: payload.filter,
-    filterText: null,
+    // don't clear filterText when a single filter is removed
+    // see: https://react-select.com/advanced#action-meta
+    filterText: payload.action === 'remove-value' ? state.filterText : null,
   }),
   [TABLE_FILTER_TEXT_CHANGED]: (state, { payload }) => ({
     ...state,

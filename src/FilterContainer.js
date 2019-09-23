@@ -28,7 +28,7 @@ const mapStateToProps = (state, { tableName }) => {
 };
 
 const mapDispatchToProps = (dispatch, { tableName }) => ({
-  onChange: (filter) => dispatch(tableFilterChanged(tableName, filter)),
+  onChange: (filter, action) => dispatch(tableFilterChanged(tableName, filter, action)),
   onTextChange: (filterText) => dispatch(tableFilterTextChanged(tableName, filterText)),
 });
 
