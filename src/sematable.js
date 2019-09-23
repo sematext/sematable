@@ -87,7 +87,7 @@ const sematable = (tableName, TableComponent, columns, configs = {}) => {
   const mapDispatchToProps = (dispatch) => ({
     onPageChange: (page) => dispatch(tablePageChanged(tableName, page)),
     onPageSizeChange: (pageSize) => dispatch(tablePageSizeChanged(tableName, pageSize)),
-    onFilterChange: (filter) => dispatch(tableFilterChanged(tableName, filter)),
+    onFilterChange: (filter, action) => dispatch(tableFilterChanged(tableName, filter, action)),
     onFilterTextChange: (filterText) => dispatch(tableFilterTextChanged(tableName, filterText)),
     onHeaderClick: (sortKey) => dispatch(tableSortChanged(tableName, sortKey)),
     onNewData: (data) => dispatch(tableNewData(tableName, data)),
