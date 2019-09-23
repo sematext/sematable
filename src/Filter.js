@@ -51,9 +51,9 @@ class Filter extends Component {
   }
 
   handleCreateOption(val) {
-    const { onChange } = this.props;
+    const { onChange, value } = this.props;
     const opt = createTextFilter(val);
-    onChange(opt);
+    onChange([...value, opt]);
   }
 
   render() {
