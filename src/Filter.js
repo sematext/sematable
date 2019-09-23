@@ -74,7 +74,8 @@ class Filter extends Component {
         options={options}
         noOptionsMessage={() => 'Type text to search, press Enter to save as filter'}
         placeholder={placeholder || defaultPlaceholder}
-        formatCreateLabel={txt => `Search for '${txt}'`}
+        formatCreateLabel={txt => `Create '${txt}' filter`}
+        isValidNewOption={input => !!input}
         onChange={selected => onChange(selected)}
         onInputChange={this.handleInputChange}
         onCreateOption={this.handleCreateOption}
