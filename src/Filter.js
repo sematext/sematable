@@ -53,7 +53,7 @@ class Filter extends Component {
   handleCreateOption(val) {
     const { onChange, value } = this.props;
     const opt = createTextFilter(val);
-    onChange([...value, opt]);
+    onChange([...value, opt], 'create-option');
   }
 
   render() {
@@ -77,7 +77,7 @@ class Filter extends Component {
         formatCreateLabel={txt => `Create '${txt}' filter`}
         createOptionPosition="first"
         isValidNewOption={input => !!input}
-        onChange={selected => onChange(selected)}
+        onChange={(selected, meta) => onChange(selected, meta.action)}
         onInputChange={this.handleInputChange}
         onCreateOption={this.handleCreateOption}
         onBlur={this.handleBlur}
