@@ -25,6 +25,7 @@ const propTypes = {
   isInitialized: PropTypes.bool.isRequired,
   visibleRows: PropTypes.array,
   filter: PropTypes.array,
+  filterText: PropTypes.string,
   sortInfo: PropTypes.object,
   pageInfo: PropTypes.object,
   selectAll: PropTypes.bool,
@@ -73,6 +74,7 @@ const sematable = (tableName, TableComponent, columns, configs = {}) => {
       isInitialized,
       visibleRows: selectors.getVisible(state, props),
       filter: selectors.getFilter(state, props),
+      filterText: selectors.getFilterText(state),
       sortInfo: selectors.getSortInfo(state, props),
       pageInfo: selectors.getPageInfo(state, props),
       selectAll: selectors.getSelectAll(state, props),
@@ -125,6 +127,7 @@ const sematable = (tableName, TableComponent, columns, configs = {}) => {
         isInitialized,
         visibleRows,
         filter,
+        filterText,
         sortInfo,
         pageInfo,
         selectAll,
@@ -223,8 +226,9 @@ const sematable = (tableName, TableComponent, columns, configs = {}) => {
             {showFilter && <Filter
               className={filterClassName}
               value={filter}
+              filterText={filterText}
               options={filterOptions}
-              onChange={(f) => onFilterChange(f)}
+              onChange={(f, a) => onFilterChange(f, a)}
               onTextChange={(f) => onFilterTextChange(f)}
               hasFilterable={hasFilterable}
               placeholder={filterPlaceholder}
