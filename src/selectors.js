@@ -122,6 +122,7 @@ export default (tableName) => {
     direction: tableProp(state, 'direction'),
   });
   const getSelectEnabled = (state) => tableProp(state, 'configs.selectEnabled');
+  const getFilterClassNamePrefix = (state) => tableProp(state, 'configs.filterClassNamePrefix');
 
   const getFiltered = createSelector(
     getInitialData,
@@ -261,6 +262,7 @@ export default (tableName) => {
     getSelectAll,
     getPrimaryKey,
     getFilterOptions,
+    getFilterClassNamePrefix,
     getFiltered,
   };
 

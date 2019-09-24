@@ -188,6 +188,7 @@ You can style these components with `style` or `className`.
  - _defaultPageSize_ overrides the default page size (if not specified 5 will be used)
  - _autoHidePagination_ if pagination should be hidden if the number of pages is 1 (default is true, which means pagination is hidden if the number of pages is equal to 1)
  - _filterClassName_ css class for the filter component
+ - _filterClassNamePrefix_ css class prefix forwarded to [react-select](https://react-select.com/styles#using-classnames) ('Select' by default)
  - _filterContainerClassName_ css class for the filter component container element ('col-md-6' by default)
  - _filterPlaceholder_ filter placeholder text
  - _pageSizeClassName_ css class for the page size component ('col-md-6' by default)
@@ -283,6 +284,7 @@ getInitialData
 getIsInitialized
 getFiltered
 getFilter
+getFilterText
 getColumns
 getSortInfo
 getPageInfo
