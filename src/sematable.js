@@ -155,6 +155,7 @@ const sematable = (tableName, TableComponent, columns, configs = {}) => {
         filterContainerClassName = 'col-md-6',
         pageSizeClassName,
         filterClassName,
+        filterClassNamePrefix = 'Select',
         filterPlaceholder,
       } = configs;
 
@@ -225,6 +226,7 @@ const sematable = (tableName, TableComponent, columns, configs = {}) => {
           <div className={filterContainerClassName}>
             {showFilter && <Filter
               className={filterClassName}
+              classNamePrefix={filterClassNamePrefix}
               value={filter}
               filterText={filterText}
               options={filterOptions}

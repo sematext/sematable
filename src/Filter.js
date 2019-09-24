@@ -10,6 +10,7 @@ const propTypes = {
   onTextChange: PropTypes.func.isRequired,
   options: PropTypes.array.isRequired,
   className: PropTypes.string,
+  classNamePrefix: PropTypes.string,
   hasFilterable: PropTypes.bool,
   placeholder: PropTypes.node,
   style: PropTypes.object,
@@ -63,6 +64,7 @@ class Filter extends Component {
       onChange,
       options,
       className,
+      classNamePrefix,
       hasFilterable,
       placeholder,
       style,
@@ -70,6 +72,7 @@ class Filter extends Component {
     const defaultPlaceholder = hasFilterable ? 'Search or filter using tags...' : 'Search...';
     return (
       <Creatable
+        classNamePrefix={classNamePrefix || 'Select'}
         className={className}
         options={options}
         noOptionsMessage={() => 'Type text to search, press Enter to save as filter'}

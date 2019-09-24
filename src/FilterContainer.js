@@ -24,6 +24,7 @@ const mapStateToProps = (state, { tableName }) => {
     filterText: selectors.getFilterText(state),
     options: selectors.getFilterOptions(state),
     columns: selectors.getColumns(state),
+    classNamePrefix: selectors.getFilterClassNamePrefix(state),
   };
 };
 
