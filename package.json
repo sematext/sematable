@@ -1,6 +1,6 @@
 {
   "name": "sematable",
-  "version": "2.1.0",
+  "version": "2.2.0",
   "description": "Client side sorting, pagination, and text filter for redux/react based apps",
   "main": "lib/index.js",
   "scripts": {
