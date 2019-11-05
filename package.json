@@ -92,7 +92,7 @@
     "eslint-plugin-jsx-a11y": "^2.1.0",
     "eslint-plugin-react": "^6.0.0",
     "font-awesome": "^4.7.0",
-    "lodash": "^4.15.0",
+    "lodash": "^4.17.15",
     "react": "15.5.0",
     "react-dom": "15.5.0",
     "react-redux": "^4.4.5",

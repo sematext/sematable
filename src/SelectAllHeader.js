@@ -18,7 +18,7 @@ class SelectAllHeader extends Component {
     } = this.props;
     if (CheckboxComponent) {
       return (
-        <th>
+        <th style={{ minWidth: '100px' }}>
           <CheckboxComponent
             type="checkbox"
             checked={selectAll}
