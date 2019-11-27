@@ -14,6 +14,7 @@ const propTypes = {
   primaryKey: PropTypes.string.isRequired,
   selectable: PropTypes.bool,
   selectEnabled: PropTypes.func,
+  onChange: PropTypes.func,
   className: PropTypes.string,
   styleName: PropTypes.string,
   CheckboxComponent: PropTypes.func,
@@ -44,6 +45,11 @@ const omitHeaderProps = props => _.omit(props, [
 ]);
 
 class Table extends Component {
+
+  onChange(newRow) {
+    this.props.onChange(newRow);
+  }
+
   render() {
     const {
       selectable,
@@ -108,7 +114,12 @@ class Table extends Component {
         )}
         <tbody>
           {data.map((row) => (
-            <TableRow key={_.get(row, primaryKey)} {...this.props} row={row} />
+            <TableRow
+              key={_.get(row, primaryKey)}
+              {...this.props}
+              row={row}
+              onChange={(newRow) => this.onChange(newRow)}
+            />
           ))}
           {!data.length &&
             <tr>
