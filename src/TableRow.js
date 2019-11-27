@@ -31,22 +31,8 @@ class TableRow extends Component {
 
     this.state = {
       value: '',
-      ...this.hamer(),
+      ...this.setInitialState(),
     };
-  }
-
-  hamer() {
-    let editingRow = null;
-    let editingRowId = null;
-    for (const [, value] of Object.entries(this.props.row)) {
-      if (value === '') {
-        editingRow = this.props.row;
-        editingRowId = this.props.row.id;
-      }
-    }
-    return (
-      { editingRow, editingRowId }
-    );
   }
 
   onCellChange(key, value) {
@@ -60,6 +46,20 @@ class TableRow extends Component {
 
   onCancelEdit() {
     this.setState({ editingRowId: null });
+  }
+
+  setInitialState() {
+    let editingRow = null;
+    let editingRowId = null;
+    for (const [, value] of Object.entries(this.props.row)) {
+      if (value === '') {
+        editingRow = this.props.row;
+        editingRowId = this.props.row.id;
+      }
+    }
+    return (
+      { editingRow, editingRowId }
+    );
   }
 
   saveCell(row) {
