@@ -46,10 +46,6 @@ const omitHeaderProps = props => _.omit(props, [
 
 class Table extends Component {
 
-  onChange(newRow) {
-    this.props.onChange(newRow);
-  }
-
   render() {
     const {
       selectable,
@@ -118,7 +114,7 @@ class Table extends Component {
               key={_.get(row, primaryKey)}
               {...this.props}
               row={row}
-              onChange={(newRow) => this.onChange(newRow)}
+              onChange={(newRow) => this.props.onChange(newRow)}
             />
           ))}
           {!data.length &&

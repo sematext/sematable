@@ -28,19 +28,25 @@ const resolveProps = (row, componentProps, tableProps) => {
 class TableRow extends Component {
   constructor(props) {
     super(props);
-    let editRow = null;
-    let editRowId = null;
-    for (const [, value] of Object.entries(this.props.row)) {
-      if (value === '') {
-        editRow = this.props.row;
-        editRowId = this.props.row.id;
-      }
-    }
+
     this.state = {
       value: '',
-      editingRowId: editRowId,
-      editingRow: editRow,
+      ...this.hamer(),
     };
+  }
+
+  hamer() {
+    let editingRow = null;
+    let editingRowId = null;
+    for (const [, value] of Object.entries(this.props.row)) {
+      if (value === '') {
+        editingRow = this.props.row;
+        editingRowId = this.props.row.id;
+      }
+    }
+    return (
+      { editingRow, editingRowId }
+    );
   }
 
   onCellChange(key, value) {
