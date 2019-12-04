@@ -71,6 +71,7 @@
     "redux": "^3.4.0"
   },
   "dependencies": {
+    "classnames": "^2.2.6",
     "prop-types": "^15.6.1",
     "react-select": "^2",
     "redux-actions": "^0.11.0",

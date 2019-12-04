@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import _ from 'lodash';
 import SelectRow from './SelectRow';
+import cn from 'classnames'
 
 const propTypes = {
   selectable: PropTypes.bool,
@@ -95,7 +96,10 @@ class TableRow extends Component {
       );
     }
     return (
-      <div onClick={() => editable && this.editRow(_.get(row, col.key), row.id, row)}>
+      <div
+        className={cn({ editable })}
+        onClick={() => editable && this.editRow(_.get(row, col.key), row.id, row)}
+      >
         {_.get(row, col.key)}
       </div>
     );
@@ -122,6 +126,7 @@ class TableRow extends Component {
     if (selectable && select.isSelected(row)) {
       className = 'table-info';
     }
+    const isEditingClass = this.state.editingRowId ? 'editing' : null;
     return (
       <React.Fragment>
         <tr className={className}>
@@ -138,14 +143,14 @@ class TableRow extends Component {
           {visibleColumns.map((col) => (
             <td
               key={col.key}
-              className={col.className}
+              className={cn(col.className, { isEditingClass })}
             >
               {this.renderCellContent(col, row, otherProps, editable && col.EditComponent)}
             </td>))}
         </tr>
         {this.state.editingRowId &&
           <tr>
-            <td colSpan={visibleColumns.length}>
+            <td colSpan={visibleColumns.length} className="isEditingClass">
               <button
                 className="btn btn-primary"
                 onClick={() => this.saveCell(this.state.editingRow)}
