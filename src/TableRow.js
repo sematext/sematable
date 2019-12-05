@@ -1,8 +1,8 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
+import cn from 'classnames';
 import _ from 'lodash';
 import SelectRow from './SelectRow';
-import cn from 'classnames'
 
 const propTypes = {
   selectable: PropTypes.bool,
