@@ -13,6 +13,7 @@ const propTypes = {
   CheckboxComponent: PropTypes.func,
   editable: PropTypes.bool,
   onChange: PropTypes.func,
+  primaryKey: PropTypes.string,
 };
 
 const resolveProps = (row, componentProps, tableProps) => {
@@ -55,7 +56,7 @@ class TableRow extends Component {
     for (const [, value] of Object.entries(this.props.row)) {
       if (value === '') {
         editingRow = this.props.row;
-        editingRowId = this.props.row.id;
+        editingRowId = this.props.row[this.props.primaryKey];
       }
     }
     return (
