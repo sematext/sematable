@@ -83,6 +83,7 @@ class TableRow extends Component {
         <col.EditComponent
           value={this.state.editingRow[col.key]}
           onChange={(e) => this.onCellChange(col.key, e.target.value)}
+          {...resolveProps(row, col.editComponentProps, otherProps)}
         />
       );
     } else if (col.Component) {
@@ -90,6 +91,8 @@ class TableRow extends Component {
         <col.Component
           row={row}
           key={col.key}
+          className={cn({ editable })}
+          onClick={() => editable && this.editRow(_.get(row, col.key), row.id, row)}
           {...resolveProps(row, col.componentProps, otherProps)}
         >
           {_.get(row, col.key)}
