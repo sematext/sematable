@@ -54,7 +54,7 @@ class TableRow extends Component {
     let editingRow = null;
     let editingRowId = null;
     for (const [, value] of Object.entries(this.props.row)) {
-      if (value === '') {
+      if (value === '' && this.props.editable) {
         editingRow = this.props.row;
         editingRowId = this.props.row[this.props.primaryKey];
       }
