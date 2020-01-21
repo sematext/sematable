@@ -82,6 +82,7 @@ class TableRow extends Component {
       return (
         <col.EditComponent
           value={this.state.editingRow[col.key]}
+          editingRow={this.state.editingRow}
           onChange={(e) => this.onCellChange(col.key, e.target.value)}
           {...resolveProps(row, col.editComponentProps, otherProps)}
         />
