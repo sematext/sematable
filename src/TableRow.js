@@ -13,6 +13,7 @@ const propTypes = {
   CheckboxComponent: PropTypes.func,
   editable: PropTypes.bool,
   onChange: PropTypes.func,
+  deleteTableRow: PropTypes.func,
   primaryKey: PropTypes.string,
 };
 
@@ -47,6 +48,11 @@ class TableRow extends Component {
   }
 
   onCancelEdit() {
+    const { editingRowId, value } = this.state;
+    const { deleteTableRow } = this.props;
+    if (value === '') {
+      deleteTableRow(editingRowId);
+    }
     this.setState({ editingRowId: null });
   }
 
@@ -155,7 +161,7 @@ class TableRow extends Component {
         </tr>
         {this.state.editingRowId &&
           <tr>
-            <td colSpan={visibleColumns.length} className="isEditingClass">
+            <td key="edit" colSpan={visibleColumns.length} className="isEditingClass">
               <button
                 className="btn btn-primary"
                 onClick={() => this.saveCell(this.state.editingRow)}
