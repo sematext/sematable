@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import _ from 'lodash';
+import cn from 'classnames';
 import SortableHeader from './SortableHeader';
 import SelectAllHeader from './SelectAllHeader';
 import TableRow from './TableRow';
@@ -13,6 +14,7 @@ const propTypes = {
   filter: PropTypes.array.isRequired,
   primaryKey: PropTypes.string.isRequired,
   selectable: PropTypes.bool,
+  editable: PropTypes.bool,
   selectEnabled: PropTypes.func,
   onChange: PropTypes.func,
   className: PropTypes.string,
@@ -56,16 +58,17 @@ class Table extends Component {
       primaryKey,
       CheckboxComponent,
       NoDataComponent,
+      editable,
     } = this.props;
-
-    const className = this.props.className || 'table-sm table-striped table-hover';
+    const classNames = cn('table', this.props.className || 'table-sm table-striped table-hover',
+    { editable });
     const visibleColumns = columns.filter((c) => !c.hidden);
     const visibleColumnsLength = visibleColumns.length;
 
     const NoDataContent = NoDataComponent || TableNoData;
 
     return (
-      <table className={`table ${className}`}>
+      <table className={classNames}>
         {headers && (
           <thead>
             <tr>
