@@ -9,6 +9,7 @@ export const TABLE_ROW_CHECKED_CHANGED = 'sematable/TABLE_ROW_CHECKED_CHANGED';
 export const TABLE_SELECT_ALL_CHANGED = 'sematable/TABLE_SELECT_ALL_CHANGED';
 export const TABLE_DESTROY_STATE = 'sematable/TABLE_DESTROY_STATE';
 export const TABLE_SET_FILTER = 'sematable/TABLE_SET_FILTER';
+export const EDITING_TABLE = 'sematable/EDITING_TABLE';
 
 export const tableInitialize = (tableName, initialData, columns, configs, filterValue) => ({
   type: TABLE_INITIALIZE,
@@ -97,5 +98,12 @@ export const tableSetFilter = (tableName, filterValue) => ({
   payload: {
     tableName,
     filterValue,
+  },
+});
+export const editingChange = (tableName, editing) => ({
+  type: EDITING_TABLE,
+  payload: {
+    tableName,
+    editing,
   },
 });

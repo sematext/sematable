@@ -12,6 +12,7 @@ import {
   TABLE_ROW_CHECKED_CHANGED,
   TABLE_DESTROY_STATE,
   TABLE_SET_FILTER,
+  EDITING_TABLE,
 } from './actions.js';
 import { createTextFilter, createValueFilter } from './common';
 
@@ -66,6 +67,10 @@ const behaviours = {
   [TABLE_NEW_DATA]: (state, { payload }) => ({
     ...state,
     initialData: payload.data,
+  }),
+  [EDITING_TABLE]: (state, { payload }) => ({
+    ...state,
+    editing: payload.editing,
   }),
   [TABLE_SET_FILTER]: (state, { payload }) => {
     const columnMap = _.keyBy(state.columns, 'key');

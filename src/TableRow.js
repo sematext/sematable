@@ -1,8 +1,11 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import cn from 'classnames';
 import _ from 'lodash';
 import SelectRow from './SelectRow';
+import { editingChange } from './actions';
+import makeSelectors from './selectors';
 
 const propTypes = {
   selectable: PropTypes.bool,
@@ -15,6 +18,22 @@ const propTypes = {
   onChange: PropTypes.func,
   deleteTableRow: PropTypes.func,
   primaryKey: PropTypes.string,
+  onEditingChange: PropTypes.func,
+  isTableEditing: PropTypes.bool,
+  isRowEmpty: PropTypes.func,
+};
+
+const mapDispatchToProps = (dispatch, { tableName }) => ({
+  onEditingChange: (editing) => dispatch(editingChange(tableName, editing)),
+});
+
+const mapStateToProps = (state, props) => {
+  const { tableName } = props;
+  const selectors = makeSelectors(tableName);
+  const isTableEditing = selectors.isTableEditing(state);
+  return {
+    isTableEditing,
+  };
 };
 
 const resolveProps = (row, componentProps, tableProps) => {
@@ -49,21 +68,22 @@ class TableRow extends Component {
 
   onCancelEdit() {
     const { editingRowId, value } = this.state;
-    const { deleteTableRow } = this.props;
+    const { deleteTableRow, onEditingChange } = this.props;
     if (value === '') {
       deleteTableRow(editingRowId);
     }
     this.setState({ editingRowId: null });
+    onEditingChange(false);
   }
 
   setInitialState() {
     let editingRow = null;
     let editingRowId = null;
-    for (const [, value] of Object.entries(this.props.row)) {
-      if (value === '' && this.props.editable) {
-        editingRow = this.props.row;
-        editingRowId = this.props.row[this.props.primaryKey];
-      }
+    const { onEditingChange, editable, row, primaryKey, isRowEmpty } = this.props;
+    if ((isRowEmpty && isRowEmpty(row)) && editable) {
+      editingRow = row;
+      editingRowId = row[primaryKey];
+      onEditingChange(true);
     }
     return (
       { editingRow, editingRowId }
@@ -73,9 +93,11 @@ class TableRow extends Component {
   saveCell(row) {
     this.props.onChange(row);
     this.setState({ editingRowId: null });
+    this.props.onEditingChange(false);
   }
 
   editRow(cellValue, rowId, row) {
+    this.props.onEditingChange(true);
     this.setState({
       editingRowId: rowId,
       editingRow: row,
@@ -84,6 +106,7 @@ class TableRow extends Component {
   }
 
   renderCellContent(col, row, otherProps, editable) {
+    const { isTableEditing } = this.props;
     if (row.id === this.state.editingRowId && col.EditComponent) {
       return (
         <col.EditComponent
@@ -99,7 +122,8 @@ class TableRow extends Component {
           row={row}
           key={col.key}
           className={cn({ editable })}
-          onClick={() => editable && this.editRow(_.get(row, col.key), row.id, row)}
+          onClick={() => (editable && !isTableEditing) &&
+            this.editRow(_.get(row, col.key), row.id, row)}
           {...resolveProps(row, col.componentProps, otherProps)}
         >
           {_.get(row, col.key)}
@@ -109,12 +133,14 @@ class TableRow extends Component {
     return (
       <div
         className={cn({ editable })}
-        onClick={() => editable && this.editRow(_.get(row, col.key), row.id, row)}
+        onClick={() => (editable && !isTableEditing)
+          && this.editRow(_.get(row, col.key), row.id, row)}
       >
         {_.get(row, col.key)}
       </div>
     );
   }
+
   render() {
     const {
       row,
@@ -137,7 +163,10 @@ class TableRow extends Component {
     if (selectable && select.isSelected(row)) {
       className = 'table-info';
     }
-    const isEditingClass = this.state.editingRowId ? 'editing' : null;
+    const { editingRow, editingRowId } = this.state;
+    const { isRowEmpty } = this.props;
+    const isEditingClass = editingRowId ? 'editing' : null;
+    const isSaveDisabled = isRowEmpty && isRowEmpty(editingRow);
     return (
       <React.Fragment>
         <tr className={className}>
@@ -165,6 +194,7 @@ class TableRow extends Component {
               <button
                 className="btn btn-primary"
                 onClick={() => this.saveCell(this.state.editingRow)}
+                disabled={isSaveDisabled}
               >Save</button>
               <button
                 className="btn btn-secundary"
@@ -179,4 +209,4 @@ class TableRow extends Component {
 }
 TableRow.propTypes = propTypes;
 
-export default TableRow;
+export default connect(mapStateToProps, mapDispatchToProps)(TableRow);
