@@ -17,6 +17,7 @@ import {
   tableRowCheckedChanged,
   tableSelectAllChanged,
   tableSetFilter,
+  editingChange,
 } from './actions.js';
 
 const propTypes = {
@@ -44,6 +45,7 @@ const propTypes = {
   onNewFilterValue: PropTypes.func.isRequired,
   onRowCheckedChange: PropTypes.func.isRequired,
   onSelectAllChange: PropTypes.func.isRequired,
+  onEditingChange: PropTypes.func.isRequired,
 };
 
 /**
@@ -94,6 +96,7 @@ const sematable = (tableName, TableComponent, columns, configs = {}) => {
     onNewFilterValue: (data) => dispatch(tableSetFilter(tableName, data)),
     onSelectAllChange: () => dispatch(tableSelectAllChanged(tableName)),
     onRowCheckedChange: (row) => dispatch(tableRowCheckedChanged(tableName, row)),
+    onEditingChange: (editing) => dispatch(editingChange(tableName, editing)),
     onInitialize: (data, filterValue) =>
       dispatch(tableInitialize(tableName, data, columns, configs, filterValue)),
   });
@@ -119,6 +122,10 @@ const sematable = (tableName, TableComponent, columns, configs = {}) => {
       if (filterValue !== nextProps.filterValue) {
         onNewFilterValue(nextProps.filterValue);
       }
+    }
+    componentWillUnmount() {
+      const { onEditingChange } = this.props;
+      onEditingChange(false);
     }
 
     render() {
@@ -199,6 +206,7 @@ const sematable = (tableName, TableComponent, columns, configs = {}) => {
             primaryKey={primaryKey}
             columns={columns}
             filter={filter}
+            tableName={tableName}
             {...configs}
           />
         );
@@ -245,6 +253,7 @@ const sematable = (tableName, TableComponent, columns, configs = {}) => {
               primaryKey={primaryKey}
               columns={columns}
               filter={filter}
+              tableName={tableName}
               {...configs}
             />
           </div>

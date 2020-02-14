@@ -108,6 +108,7 @@ export default (tableName) => {
 
   const getIsInitialized = (state) => state.sematable[tableName] !== undefined;
   const getInitialData = (state) => tableProp(state, 'initialData');
+  const getEditing = (state) => tableProp(state, 'editing');
   const getFilter = (state) => tableProp(state, 'filter');
   const getFilterText = (state) => tableProp(state, 'filterText');
   const getColumns = (state) => tableProp(state, 'columns');
@@ -248,6 +249,10 @@ export default (tableName) => {
       return _.filter(filtered, includesKey);
     }
   );
+  const isTableEditing = createSelector(
+    getEditing,
+    editing => editing
+  );
 
   selectors[tableName] = {
     getInitialData,
@@ -264,6 +269,7 @@ export default (tableName) => {
     getFilterOptions,
     getFilterClassNamePrefix,
     getFiltered,
+    isTableEditing,
   };
 
   return selectors[tableName];
