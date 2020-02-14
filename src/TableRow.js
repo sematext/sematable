@@ -20,6 +20,7 @@ const propTypes = {
   primaryKey: PropTypes.string,
   onEditingChange: PropTypes.func,
   isTableEditing: PropTypes.bool,
+  isRowEmpty: PropTypes.func,
 };
 
 const mapDispatchToProps = (dispatch, { tableName }) => ({
@@ -78,8 +79,8 @@ class TableRow extends Component {
   setInitialState() {
     let editingRow = null;
     let editingRowId = null;
-    const { onEditingChange, editable, row, primaryKey } = this.props;
-    if (this.isRowEmpty(row) && editable) {
+    const { onEditingChange, editable, row, primaryKey, isRowEmpty } = this.props;
+    if (isRowEmpty(row) && editable) {
       editingRow = row;
       editingRowId = row[primaryKey];
       onEditingChange(true);
@@ -102,15 +103,6 @@ class TableRow extends Component {
       editingRow: row,
       value: cellValue,
     });
-  }
-
-  isRowEmpty(row) {
-    if (row) {
-      const stringKeys = Object.keys(row).filter(key => typeof row[key] === 'string');
-      const isStringEmptyArray = stringKeys.map(key => row[key] === '');
-      return isStringEmptyArray.every((elm) => elm === true);
-    }
-    return false;
   }
 
   renderCellContent(col, row, otherProps, editable) {
@@ -173,7 +165,7 @@ class TableRow extends Component {
     }
     const { editingRow, editingRowId } = this.state;
     const isEditingClass = editingRowId ? 'editing' : null;
-    const isSaveDisabled = this.isRowEmpty(editingRow);
+    const isSaveDisabled = this.props.isRowEmpty(editingRow);
     return (
       <React.Fragment>
         <tr className={className}>
