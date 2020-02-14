@@ -80,7 +80,7 @@ class TableRow extends Component {
     let editingRow = null;
     let editingRowId = null;
     const { onEditingChange, editable, row, primaryKey, isRowEmpty } = this.props;
-    if (isRowEmpty(row) && editable) {
+    if ((isRowEmpty && isRowEmpty(row)) && editable) {
       editingRow = row;
       editingRowId = row[primaryKey];
       onEditingChange(true);
@@ -164,8 +164,9 @@ class TableRow extends Component {
       className = 'table-info';
     }
     const { editingRow, editingRowId } = this.state;
+    const { isRowEmpty } = this.props;
     const isEditingClass = editingRowId ? 'editing' : null;
-    const isSaveDisabled = this.props.isRowEmpty(editingRow);
+    const isSaveDisabled = isRowEmpty && isRowEmpty(editingRow);
     return (
       <React.Fragment>
         <tr className={className}>
