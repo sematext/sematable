@@ -16,6 +16,7 @@ const propTypes = {
   CheckboxComponent: PropTypes.func,
   editable: PropTypes.bool,
   onChange: PropTypes.func,
+  onClick: PropTypes.func,
   deleteTableRow: PropTypes.func,
   primaryKey: PropTypes.string,
   onEditingChange: PropTypes.func,
@@ -150,6 +151,7 @@ class TableRow extends Component {
       columns,
       editable,
       CheckboxComponent,
+      onClick,
       ...otherProps
     } = this.props;
     const select = headers && headers.select;
@@ -169,7 +171,7 @@ class TableRow extends Component {
     const isSaveDisabled = isRowEmpty && isRowEmpty(editingRow);
     return (
       <React.Fragment>
-        <tr className={className}>
+        <tr className={className} onClick={onClick && (() => { onClick(row) })}>
           {selectable &&
             <td key="select" style={{ width: '1%', whiteSpace: 'nowrap' }}>
               <SelectRow

@@ -17,6 +17,7 @@ const propTypes = {
   editable: PropTypes.bool,
   selectEnabled: PropTypes.func,
   onChange: PropTypes.func,
+  onRowClick: PropTypes.func,
   className: PropTypes.string,
   styleName: PropTypes.string,
   CheckboxComponent: PropTypes.func,
@@ -59,6 +60,7 @@ class Table extends Component {
       CheckboxComponent,
       NoDataComponent,
       editable,
+      onRowClick,
     } = this.props;
     const classNames = cn('table', this.props.className || 'table-sm table-striped table-hover',
     { editable });
@@ -118,6 +120,7 @@ class Table extends Component {
               {...this.props}
               row={row}
               onChange={(newRow) => this.props.onChange(newRow)}
+              onClick={onRowClick}
             />
           ))}
           {!data.length &&
