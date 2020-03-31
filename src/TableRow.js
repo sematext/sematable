@@ -152,6 +152,8 @@ class TableRow extends Component {
       editable,
       CheckboxComponent,
       onClick,
+      primaryKey,
+      isTableEditing,
       ...otherProps
     } = this.props;
     const select = headers && headers.select;
@@ -171,7 +173,11 @@ class TableRow extends Component {
     const isSaveDisabled = isRowEmpty && isRowEmpty(editingRow);
     return (
       <React.Fragment>
-        <tr className={className} onClick={onClick && (() => { onClick(row) })}>
+        <tr
+          className={className}
+          onClick={onClick ? (() => { onClick(row); })
+          : (editable && !isTableEditing) && (() => this.editRow(row[primaryKey], row.id, row))}
+        >
           {selectable &&
             <td key="select" style={{ width: '1%', whiteSpace: 'nowrap' }}>
               <SelectRow
