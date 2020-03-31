@@ -10,7 +10,8 @@
     "eslint": "./node_modules/.bin/eslint src",
     "lint": "npm run eslint",
     "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook"
+    "build-storybook": "build-storybook",
+    "watch": "watch 'npm run compile' src/"
   },
   "repository": {
     "type": "git",
@@ -75,7 +76,8 @@
     "prop-types": "^15.6.1",
     "react-select": "^2",
     "redux-actions": "^0.11.0",
-    "reselect": "^2.5.3"
+    "reselect": "^2.5.3",
+    "watch": "^1.0.2"
   },
   "devDependencies": {
     "@kadira/storybook": "^2.21.0",
