@@ -9,7 +9,7 @@ import PageSizeContainer from './PageSizeContainer.js';
 import PaginationContainer from './PaginationContainer.js';
 import makeSelectors from './selectors.js';
 import reducer from './reducer.js';
-import { tableDestroyState, tableSetFilter } from './actions.js';
+import { tableDestroyState, tableSetFilter, tableUserSelection } from './actions.js';
 
 export {
   SortableHeader,
@@ -23,6 +23,7 @@ export {
   makeSelectors,
   tableDestroyState,
   tableSetFilter,
+  tableUserSelection,
   reducer,
 };
 export default sematable;

@@ -13,6 +13,7 @@ import {
   TABLE_DESTROY_STATE,
   TABLE_SET_FILTER,
   EDITING_TABLE,
+  TABLE_USER_SELECTION,
 } from './actions.js';
 import { createTextFilter, createValueFilter } from './common';
 
@@ -27,7 +28,7 @@ const defaultState = (configs = {}) => ({
   sortKey: configs.sortKey,
   direction: configs.sortDirection || 'asc',
   selectAll: false,
-  userSelection: [],
+  userSelection: configs.initialUserSelection || [],
   configs,
 });
 
@@ -146,6 +147,10 @@ const behaviours = {
       ],
     };
   },
+  [TABLE_USER_SELECTION]: (state, { payload }) => ({
+    ...state,
+    userSelection: payload.userSelection || [],
+  }),
   [TABLE_DESTROY_STATE]: (state) => {
     if (!state) {
       return state;
