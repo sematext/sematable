@@ -12,8 +12,14 @@ export const TABLE_SET_FILTER = 'sematable/TABLE_SET_FILTER';
 export const EDITING_TABLE = 'sematable/EDITING_TABLE';
 export const TABLE_USER_SELECTION = 'sematable/TABLE_USER_SELECTION';
 
-export const tableInitialize = (tableName, initialData, columns, configs, filterValue, ownProps) => 
-({
+export const tableInitialize = (
+  tableName, 
+  initialData, 
+  columns, 
+  configs, 
+  filterValue, 
+  ownProps = {},
+  ) => ({
   type: TABLE_INITIALIZE,
   payload: {
     tableName,
