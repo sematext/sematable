@@ -86,7 +86,7 @@ const sematable = (tableName, TableComponent, columns, configs = {}) => {
     };
   };
 
-  const mapDispatchToProps = (dispatch) => ({
+  const mapDispatchToProps = (dispatch, ownProps) => ({
     onPageChange: (page) => dispatch(tablePageChanged(tableName, page)),
     onPageSizeChange: (pageSize) => dispatch(tablePageSizeChanged(tableName, pageSize)),
     onFilterChange: (filter, action) => dispatch(tableFilterChanged(tableName, filter, action)),
@@ -98,7 +98,7 @@ const sematable = (tableName, TableComponent, columns, configs = {}) => {
     onRowCheckedChange: (row) => dispatch(tableRowCheckedChanged(tableName, row)),
     onEditingChange: (editing) => dispatch(editingChange(tableName, editing)),
     onInitialize: (data, filterValue) =>
-      dispatch(tableInitialize(tableName, data, columns, configs, filterValue)),
+      dispatch(tableInitialize(tableName, data, columns, configs, filterValue, ownProps)),
   });
 
   class DataTable extends Component {

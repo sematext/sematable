@@ -28,7 +28,7 @@ const defaultState = (configs = {}) => ({
   sortKey: configs.sortKey,
   direction: configs.sortDirection || 'asc',
   selectAll: false,
-  userSelection: configs.initialUserSelection || [],
+  userSelection: [],
   configs,
 });
 
@@ -46,6 +46,7 @@ const behaviours = {
       ...defaultState(payload.configs),
       ...state,
       ...payload,
+      userSelection: payload.initialUserSelection || [],
     };
     const primaryKeyCol = _.find(nextState.columns, 'primaryKey');
     const columnMap = _.keyBy(nextState.columns, 'key');
