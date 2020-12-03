@@ -10,8 +10,16 @@ export const TABLE_SELECT_ALL_CHANGED = 'sematable/TABLE_SELECT_ALL_CHANGED';
 export const TABLE_DESTROY_STATE = 'sematable/TABLE_DESTROY_STATE';
 export const TABLE_SET_FILTER = 'sematable/TABLE_SET_FILTER';
 export const EDITING_TABLE = 'sematable/EDITING_TABLE';
+export const TABLE_USER_SELECTION = 'sematable/TABLE_USER_SELECTION';
 
-export const tableInitialize = (tableName, initialData, columns, configs, filterValue) => ({
+export const tableInitialize = (
+  tableName, 
+  initialData, 
+  columns, 
+  configs, 
+  filterValue, 
+  ownProps = {},
+  ) => ({
   type: TABLE_INITIALIZE,
   payload: {
     tableName,
@@ -19,6 +27,7 @@ export const tableInitialize = (tableName, initialData, columns, configs, filter
     columns,
     configs,
     filterValue,
+    initialUserSelection: ownProps.initialUserSelection,
   },
 });
 
@@ -83,6 +92,14 @@ export const tableSelectAllChanged = (tableName) => ({
   type: TABLE_SELECT_ALL_CHANGED,
   payload: {
     tableName,
+  },
+});
+
+export const tableUserSelection = (tableName, userSelection) => ({
+  type: TABLE_USER_SELECTION,
+  payload: {
+    tableName,
+    userSelection,
   },
 });
 
