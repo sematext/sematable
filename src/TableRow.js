@@ -205,7 +205,7 @@ class TableRow extends Component {
                 disabled={isSaveDisabled}
               >Save</button>
               <button
-                className="btn btn-secundary"
+                className="btn btn-secondary"
                 onClick={() => this.onCancelEdit()}
               >Cancel</button>
             </td>
