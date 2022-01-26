@@ -62,7 +62,7 @@
   "peerDependencies": {
     "bootstrap": "^3.0 || ^4.0",
     "font-awesome": "^4.7.0",
-    "lodash": "^4.17.4",
+    "lodash": "^4.17.12",
     "react": "^15.5 || ^16 || ^17",
     "react-dom": "^15.5 || ^16 || ^17",
     "react-redux": "^4 || ^5 || ^6 || ^7",
