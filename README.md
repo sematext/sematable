@@ -17,22 +17,8 @@ navigations.
 - [More About Sematable](https://sematext.com/blog/2016/12/07/reactjs-redux-table-sematable/)
 - [Live Sematable examples](https://apps.sematext.com/demo)
 
-![](https://nodei.co/npm/sematable.png?downloads=true&downloadRank=true&stars=true)
 
-## Getting Started
-
-If you would like to simply test the table alone in your browser, we have included React Storybook.
-
-```
-npm install
-npm run storybook
-```
-
-Then open your browser to http://localhost:6006/. Try to delete the search
-filters and watch how the table responds. There are several stories featuring
-Filters, Bootstrap, and Editable cells.
-
-### :warning: CSS Dependencies
+### ⚠ CSS Dependencies
 
 Sematable assumes that Bootstrap CSS, Font Awesome CSS, and react-select CSS are already loaded, so please make sure that's the case. Sematable should work with either Bootstrap 3 or Bootstrap 4. You can find the css for react-select in `node_modules/react-select/dist/react-select.css`.
 
@@ -95,7 +81,7 @@ AppsTable.propTypes = propTypes;
 export default sematable('allApps', AppsTable, columns);
 ```
 
-AppsTableActions.js:
+`AppsTableActions.js`:
 ```javascript
 import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router';

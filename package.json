@@ -1,6 +1,6 @@
 {
   "name": "sematable",
-  "version": "2.9.0",
+  "version": "2.10.0",
   "description": "Client side sorting, pagination, and text filter for redux/react based apps",
   "main": "lib/index.js",
   "scripts": {
@@ -8,10 +8,7 @@
     "compile": "babel --presets es2015 -d lib/ src/",
     "prepublish": "npm run compile",
     "eslint": "./node_modules/.bin/eslint src",
-    "lint": "npm run eslint",
-    "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook",
-    "watch": "watch 'npm run compile' src/"
+    "lint": "npm run eslint"
   },
   "repository": {
     "type": "git",
@@ -65,10 +62,10 @@
   "peerDependencies": {
     "bootstrap": "^3.0 || ^4.0",
     "font-awesome": "^4.7.0",
-    "lodash": "^4.15.0",
-    "react": "^15.5.0",
-    "react-dom": "^15.5.0",
-    "react-redux": "^4 || ^5",
+    "lodash": "^4.17.4",
+    "react": ">= 15.5",
+    "react-dom": ">= 15.5",
+    "react-redux": ">= 4",
     "redux": "^3.4.0"
   },
   "dependencies": {
@@ -76,11 +73,9 @@
     "prop-types": "^15.6.1",
     "react-select": "^2",
     "redux-actions": "^0.11.0",
-    "reselect": "^2.5.3",
-    "watch": "^1.0.2"
+    "reselect": "^2.5.3"
   },
   "devDependencies": {
-    "@kadira/storybook": "^2.21.0",
     "babel-cli": "^6.14.0",
     "babel-eslint": "^6.0.2",
     "babel-plugin-transform-object-rest-spread": "^6.6.5",
