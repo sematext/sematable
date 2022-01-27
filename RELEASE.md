@@ -19,6 +19,10 @@ Given a version number MAJOR.MINOR.PATCH, increment the:
 
 Read more at [semver.org](https://semver.org/).
 
+## Run npm install
+
+Run `npm install` to generate up to date output (and package-lock.json with the latest version)
+
 ## Tag the release
 
 Now that you have created the version bump commit, tag it with the release name. For example:
