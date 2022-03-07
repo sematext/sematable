@@ -1,5 +1,9 @@
 # Sematable
 
+[![No Maintenance Intended](http://unmaintained.tech/badge.svg)](http://unmaintained.tech/)
+
+⛔️ DEPRECATED This repository isn't mantained by Sematext any more.
+
 Sematable wraps a table component, and provides:
 
  - filtering by column value
